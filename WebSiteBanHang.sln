@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBanHang", "WebBanHang\WebBanHang.csproj", "{9CBEB553-FC5E-420A-AD17-E8251F4A35D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBanHang", "WebBanHang\WebBanHang.csproj", "{9CBEB553-FC5E-420A-AD17-E8251F4A35D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBanHang.Models", "WebBanHang.Models\WebBanHang.Models.csproj", "{8E3E9BF4-07D7-4285-BB26-31CFFB4A93CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBanHang.Models", "WebBanHang.Models\WebBanHang.Models.csproj", "{8E3E9BF4-07D7-4285-BB26-31CFFB4A93CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBanHang.DataAcess", "WebBanHang.DataAcess\WebBanHang.DataAcess.csproj", "{95E2E2BD-012E-4467-AB0E-F355504FD1EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBanHang.DataAcess", "WebBanHang.DataAcess\WebBanHang.DataAcess.csproj", "{95E2E2BD-012E-4467-AB0E-F355504FD1EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

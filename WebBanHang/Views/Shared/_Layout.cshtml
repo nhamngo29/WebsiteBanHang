@@ -1,49 +1,585 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebBanHang</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/WebBanHang.styles.css" asp-append-version="true" />
+    <title>@ViewBag.Title</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P&T Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- jQuery library -->
+    <!-- link font chữ -->
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- link icon -->
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- link css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="~/css/base.css">
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="stylesheet" href="~/css/reponsive1.css">
+    <link rel="icon" href="~/image/logo/main.png" type="image/x-icon" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous"></script>
 </head>
+<style>
+    form.example input[type=text] {
+        padding: 10px;
+        font-size: 17px;
+        border: 1px solid grey;
+        float: left;
+        width: 80%;
+        background: #f1f1f1;
+    }
+
+    form.example button {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        background: #2196F3;
+        color: white;
+        font-size: 17px;
+        border: 1px solid grey;
+        border-left: none;
+        cursor: pointer;
+    }
+
+        form.example button:hover {
+            background: #0b7dda;
+        }
+
+    form.example::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+    /* Mobile & tablet  */
+    @@media (max-width: 1023px) {
+    }
+    /* tablet */
+    @@media (min-width: 740px) and (max-width: 1023px) {
+        .owl-item {
+            width: 396px;
+            padding: 16px 0;
+        }
+
+        .card:hover .hover-icon {
+            display: none;
+        }
+    }
+    /* mobile */
+    @@media (max-width: 739px) {
+        .owl-item {
+            float: unset;
+            padding: 16px 0;
+        }
+
+        .card:hover .hover-icon {
+            display: none;
+        }
+    }
+</style>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebBanHang</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <div class="overlay hidden"></div>
+    <!-- mobile menu -->
+    <div class="mobile-main-menu">
+        <div class="drawer-header">
+            <a href="">
+                <div class="drawer-header--auth">
+                    <div class="_object">
+                    </div>
+                    <div class="_body">
+                        Đăng nhập
+                        <br>Nhận nhiều ưu đãi hơn
+                    </div>
+                </div>
+            </a>
+        </div>
+        <ul class="ul-first-menu">
+            <li>
+                <a href="">Đăng nhập</a>
+            </li>
+            <li>
+                <a href="" class="abc">Đăng kí</a>
+            </li>
+        </ul>
+        <!-- <ul class="ul-first-menu">
+          <li>
+            <a href="">Tài khoản của tôi</a>
+          </li>
+          <li>
+            <a href="">Địạ chỉ của tôi</a>
+          </li>
+          <li>
+            <a href="">Đơn mua</a>
+          </li>
+          <li>
+            <a href="" class="list-like-noicte">Danh sách yêu thích</a>
+            <span id="header__second__like--notice" class="header__second__like--notice">3</span>
+          </li>
+          <li>
+            <a href="">Đăng xuất</a>
+          </li> -->
+
+        <div class="la-scroll-fix-infor-user">
+            <div class="la-nav-menu-items">
+                <div class="la-title-nav-items">
+                    <strong>Danh mục</strong>
+                </div>
+                <ul class="la-nav-list-items">
+                    <li class="ng-scope">
+                        @Html.ActionLink("Trang chủ", "Index", new { Controller = "Home" })
+                    </li>
+                    <li class="ng-scope">
+                        @Html.ActionLink("Giới thiệu", "intro", new { Controller = "About" })
+                    </li>
+                    <li class="ng-scope ng-has-child1">
+                        <a href="~/Product.html">Sản phẩm <i class="fas fa-plus cong"></i> <i class="fas fa-minus tru hidden"></i></a>
+                        <ul class="ul-has-child1">
+                            <li class="ng-scope ng-has-child2">
+                                <a href="~/Product.html">
+                                    Tất cả sản phẩm <i class="fas fa-plus cong1" onclick="hienthi(1,`abc`)"></i> <i class="fas fa-minus tru1 hidden" onclick="hienthi(1,`abc`)"></i>
+                                </a>
+                            </li>
+                            <li class="ng-scope ng-has-child2">
+                                <a href="~/Product.html">
+                                    Áo <i class="fas fa-plus cong2" onclick="hienthi(2,`abc2`)"></i> <i class="fas fa-minus tru2 hidden" onclick="hienthi(2,`abc2`)"></i>
+                                </a>
+                                <ul class="ul-has-child2 hidden" id="abc2">
+                                    <li class="ng-scope">
+
+                                        @Html.ActionLink("Áo thun", "Index", new { ProType = 1, Controller = "Products" }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Áo Polo", "Index", new { Controller = "Products", ProType = 2 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Áo Sơmi", "Index", new { Controller = "Products", ProType = 3 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Khoác", "Index", new { Controller = "Products", ProType = 4 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Áo Sweat", "Index", new { Controller = "Products", ProType = 5 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Hoodie", "Index", new { Controller = "Products", ProType = 6 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Tank Top", "Index", new { Controller = "Products", ProType = 7 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Sét Đồ", "Index", new { Controller = "Products", ProType = 8 }, htmlAttributes: new { })
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="ng-scope ng-has-child2">
+                                <a href="~/Product.html">
+                                    Quần<i class="fas fa-plus cong3" onclick="hienthi(3,`abc3`)"></i> <i class="fas fa-minus tru3 hidden" onclick="hienthi(3,`abc3`)"></i>
+                                </a>
+                                <ul class="ul-has-child2 hidden" id="abc3">
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Jean", "Index", new { Controller = "Products", ProType = 9 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Short", "Index", new { Controller = "Products", ProType = 10 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Kaki & Chino", "Index", new { Controller = "Products", ProType = 11 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Joger", "Index", new { Controller = "Products", ProType = 12 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Tây", "Index", new { Controller = "Products", ProType = 13 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Tập Gym", "Index", new { Controller = "Products", ProType = 14 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Sét Đồ", "Index", new { Controller = "Products", ProType = 8 }, htmlAttributes: new { })
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="ng-scope ng-has-child2">
+                                <a href="~/Product.html">
+                                    Phụ kiện <i class="fas fa-plus cong4" onclick="hienthi(4,`abc4`)"></i> <i class="fas fa-minus tru4 hidden " onclick="hienthi(4,`abc4`)"></i>
+                                </a>
+                                <ul class="ul-has-child2 hidden" id="abc4">
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Jean", "Index", new { Controller = "Products", ProType = 15 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Short", "Index", new { Controller = "Products", ProType = 16 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Kaki & Chino", "Index", new { Controller = "Products" }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Joger", "Index", new { Controller = "Products", ProType = 17 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Tây", "Index", new { Controller = "Products", ProType = 18 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Quần Tập Gym", "Index", new { Controller = "Products", ProType = 19 }, htmlAttributes: new { })
+                                    </li>
+                                    <li class="ng-scope">
+                                        @Html.ActionLink("Sét Đồ", "Index", new { Controller = "Products", ProType = 8 }, htmlAttributes: new { })
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="ng-scope">
+                        <a href="~/news.html">Tin tức</a>
+                    </li>
+                    <li class="ng-scope">
+                        <a href="~/contact.html">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul class="mobile-support">
+            <li>
+                <div class="drawer-text-support">Hỗ trợ</div>
+            </li>
+            <li>
+                <i class="fas fa-phone-square-alt footer__item-icon">HOTLINE: </i>
+                <a href="tel:19006750">19006750</a>
+            </li>
+            <li>
+                <i class="fas fa-envelope-square footer__item-icon">Email: </i>
+                <a href="mailto:support@sapo.vn">support@gmail.vn</a>
+            </li>
+        </ul>
+    </div>
+    <!-- end mobile menu -->
+    <!-- header -->
+    <header class="header">
+        <div class="container">
+            <div class="top-link clearfix hidden-sm hidden-xs">
+                <div class="row">
+                    <div class="col-6 social_link">
+                        <div class="social-title">Theo dõi: </div>
+                        <a href=""><i class="fab fa-facebook" style="font-size: 24px; margin-right: 10px"></i></a>
+                        <a href=""><i class="fab fa-instagram" style="font-size: 24px; margin-right: 10px;color: pink;"></i></a>
+                        <a href=""><i class="fab fa-youtube" style="font-size: 24px; margin-right: 10px;color: red;"></i></a>
+                        <a href=""><i class="fab fa-twitter" style="font-size: 24px; margin-right: 10px"></i></a>
+                    </div>
+                    <div class="col-6 login_link">
+                        <ul class="header_link right m-auto">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>
+                                    <a href="/Account/Profile"><i class="fi fi-sr-user"></i>@User.Identity.Name.ToString()</a>
+                                </li>
+                                <li>
+                                    <a href="/Account/LogOut"><i class="fas fa-sign-in-alt mr-3" style="margin-left: 10px;"></i>Đăng xuất</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/Account/LogIn"><i class="fas fa-sign-in-alt mr-3"></i>Đăng nhập</a>
+                                </li>
+                                <li>
+                                    <a href="/Account/Regisster"><i class="fas fa-user-plus mr-3" style="margin-left: 10px;"></i>Đăng kí</a>
+                                </li>
+                            }
+                        </ul>
+                        <!-- <ul class="nav nav__first right">
+                            <li class="nav-item nav-item__first nav-item__first-user">
+                              <img src="~/img/product/noavatar.png" alt="" class="nav-item__first-img">
+                              <span class="nav-item__first-name">Quốc Trung</span>
+                              <ul class="nav-item__first-menu">
+                                <li class="nav-item__first-item">
+                                  <a href="">Tài khoản của tôi</a>
+                                </li>
+                                <li class="nav-item__first-item">
+                                  <a href="">Địa chỉ của tôi</a>
+                                </li>
+                                <li class="nav-item__first-item">
+                                  <a href="">Đơn mua</a>
+                                </li>
+                                <li class="nav-item__first-item">
+                                  <a href="">Đăng xuất</a>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul> -->
+                    </div>
+                </div>
+            </div>
+            <div class="header-main clearfix">
+                <div class="row">
+                    <div class="col-lg-3 col-100-h">
+                        <div id="trigger-mobile" class="visible-sm visible-xs"><i class="fas fa-bars"></i></div>
+                        <div class="logo">
+                            <a href="">
+                                <img src="~/image/logo/logomain.png" alt="">
+                            </a>
+                        </div>
+                        <div class="mobile_cart visible-sm visible-xs">
+                            <a href="~/Account/Cart" class="header__second__cart--icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="header__second__cart--notice">0</span>
+                            </a>
+                            <a href="~/listlike.html" class="header__second__like--icon">
+                                <i class="far fa-heart"></i>
+                                <span id="header__second__like--notice" class="header__second__like--notice">0</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 m-auto pdt15">
+                        <form class="example" action="/products/index" method="post">
+                            <input type="text" class="input-search" placeholder="Tìm kiếm.." name="search" value="@ViewBag.Search">
+                            <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="col-3 m-auto hidden-sm hidden-xs">
+                        <div class="item-car clearfix">
+                            <a href="~/Account/Cart" class="header__second__cart--icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="header__second__cart--notice" class="header__second__cart--notice">0</span>
+                            </a>
+                        </div>
+                        <div class="item-like clearfix">
+                            <a href="~/listlike.html" class="header__second__like--icon">
+                                <i class="far fa-heart"></i>
+                                <span id="header__second__like--notice" class="header__second__like--notice">0</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="header_nav hidden-sm hidden-xs">
+            <div class="container">
+                <ul class="header_nav-list nav">
+                    <li class="header_nav-list-item ">@Html.ActionLink("Trang chủ", "Index", new { controller = "Home" }, htmlAttributes: new { @class = "active" })</li>
+                    <li class="header_nav-list-item">@Html.ActionLink("Giới thiệu", "Index", new { controller = "About" }, htmlAttributes: new { @class = "" })</li>
+                    <li class="header_nav-list-item has-mega">
+                        <a href="/Products/Index">Sản phẩm<i class="fas fa-angle-right" style="margin-left: 5px;"></i></a>
+                        <div class="mega-content" style="overflow-x: hidden;">
+                            <div class="row">
+                                <ul class="col-8 no-padding level0">
+                                    <li class="level1">
+                                        @Html.ActionLink("Tất cả sản phẩm", "Index", new { Controller = "Products" }, htmlAttributes: new { @class = "hmega" })
+                                    </li>
+                                    <li class="level1">
+                                        @Html.ActionLink("Áo", "Index", new { CaregoryID = 1, Controller = "Products" }, htmlAttributes: new { @class = "hmega" })
+                                        <ul class="level1">
+                                            <li class="level2">@Html.ActionLink("Áo thun", "Index", new { ProType = 1, Controller = "Products" }, htmlAttributes: new { })</li>
+                                            <li class="level2">@Html.ActionLink("Áo Polo", "Index", new { ProType = 2, Controller = "Products" }, htmlAttributes: new { })</li>
+                                            <li class="level2">@Html.ActionLink("Áo Sơmi", "Index", new { ProType = 3, Controller = "Products" }, htmlAttributes: new { })</li>
+                                            <li class="level2">@Html.ActionLink("Khoác", "Index", new { ProType = 4, Controller = "Products" }, htmlAttributes: new { })</li>
+                                            <li class="level2">@Html.ActionLink("Áo Sweat", "Index", new { ProType = 5, Controller = "Products" }, htmlAttributes: new { })</li>
+                                            <li class="level2">@Html.ActionLink("Sét Đồ", "Index", new { ProType = 6, Controller = "Products" }, htmlAttributes: new { })</li>
+                                            <li class="level2">@Html.ActionLink("Tank Top", "Index", new { ProType = 7, Controller = "Products" }, htmlAttributes: new { })</li>
+                                            <li class="level2">@Html.ActionLink("Hoodie", "Index", new { ProType = 8, Controller = "Products" }, htmlAttributes: new { })</li>
+                                        </ul>
+                                    </li>
+                                    <li class="level1">
+                                        @Html.ActionLink("Quần", "Index", new { CaregoryID = 2, Controller = "Products" }, htmlAttributes: new { @class = "hmega" })
+                                        <ul class="level1">
+                                            <li class="level2">
+                                                @Html.ActionLink("Quần Jean", "Index", new { ProType = 9, Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Quần Short", "Index", new { ProType = 10, Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Quần Kaki & Chino", "Index", new { ProType = 11, Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Quần Joger", "Index", new { ProType = 12, Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Quần Tây", "Index", new { ProType = 13, Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Quần Tập Gym", "Index", new { ProType = 14, Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Sét Đồ", "Index", new { ProType = 8, Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="level1">
+                                        @Html.ActionLink("Phụ kiện", "Index", new { CaregoryID = 4, Controller = "Products" }, htmlAttributes: new { @class = "hmega" })
+                                        <ul class="level1">
+                                            <li class="level2">
+                                                @Html.ActionLink("Balo, Túi & Ví ", "Index", new { Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Nón ", "Index", new { Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Thắt lưng", "Index", new { Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Mắt kính", "Index", new { Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                            <li class="level2">
+                                                @Html.ActionLink("Vớ", "Index", new { Controller = "Products" }, htmlAttributes: new { })
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="level1">
+                                        @Html.ActionLink("Giày", "Index", new { CaregoryID = 3, Controller = "Products" }, htmlAttributes: new { @class = "hmega" })
+                                        <ul class="level1">
+                                            <li class="level2">
+                                                <a href="~/Product.html">@Html.ActionLink("Sandal", "Index", new { Controller = "Products" }, htmlAttributes: new { })</a>
+                                            </li>
+                                            <li class="level2">
+                                                <a href="~/Product.html">@Html.ActionLink("Giày thể thao", "Index", new { Controller = "Products" }, htmlAttributes: new { })</a>
+                                            </li>
+                                            <li class="level2">
+                                                <a href="~/Product.html">@Html.ActionLink("Giày chạy bộ", "Index", new { Controller = "Products" }, htmlAttributes: new { })</a>
+                                            </li>
+                                            <li class="level2">
+                                                <a href="~/Product.html">@Html.ActionLink("Giày đá banh", "Index", new { Controller = "Products" }, htmlAttributes: new { })</a>
+                                            </li>
+                                            <li class="level2">
+                                                <a href="~/Product.html">@Html.ActionLink("Giày tây", "Index", new { Controller = "Products" }, htmlAttributes: new { })</a>
+                                            </li>
+                                            <li class="level2">
+                                                <a href="~/Product.html">@Html.ActionLink("Dép", "Index", new { Controller = "Products" }, htmlAttributes: new { })</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="col-4">
+                                    <a href="">
+                                        <picture>
+                                            <img src="https://media.giphy.com/media/mj7HcKFq23oobJMcOG/giphy.gif" alt="" width="80%">
+                                        </picture>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="header_nav-list-item"><a href="~/news.html">@Html.ActionLink("Tin Tức", "index", new { controller = "News" })</a></li>
+                    <li class="header_nav-list-item"><a href="~/contact.html">@Html.ActionLink("Liên hệ", "Index", new { Controller = "About" })</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- end header -->
+    <!-- content -->
+    <div>
+        @RenderBody()
+    </div>
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <img src="~/image/logo/logomain.png" alt="" width="100px" height="100px"
+                         style="border-radius: 50%;border: 3px solid #000;margin-bottom: 20px;">
+                    <ul class="footer__list">
+                        <li class="footer__item">
+                            <p><i class="fas fa-search-location footer__item-icon"></i> Ho Chi Minh, Viet Nam</p>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="footer__item">
+                            <p>
+                                <i class="fas fa-phone-square-alt footer__item-icon"></i> Phone:  @Html.ActionLink("0123456789", "tel:0123456789")
+                            </p>
+                        </li>
+                        <li class="footer__item">
+                            <p>
+                                <i class="fas fa-envelope-square footer__item-icon"></i> Email: @Html.ActionLink("nhamngooinfo@gmail.com", "mailto:nhamngooinfo@gmail.com")
+                            </p>
+                        </li>
+                        <li>
+                            @Html.ActionLink(" ", "https://www.facebook.com/nhamngoo.29/", null, null, new { @class = "fab fa-facebook", @style = "font-size: 24px; margin-right: 10px" })
+                            @Html.ActionLink(" ", "https://www.instagram.com/nhamngoo.29/", null, null, new { @class = "fab fa-instagram", @style = "font-size: 24px; margin-right: 10px;color: pink;" })
+                            @Html.ActionLink(" ", "https://www.instagram.com/nhamngoo.29/", null, null, new { @class = "fab fa-youtube", @style = "font-size: 24px; margin-right: 10px;color: red;" })
+                            @Html.ActionLink(" ", "https://www.instagram.com/nhamngoo.29/", null, null, new { @class = "fab fa-twitter", @style = "font-size: 24px; margin-right: 10px" })
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div style="display: flex;justify-content:space-between;cursor: pointer;margin-bottom: 8px;"
+                         data-toggle="collapse" data-target="#demo2">
+                        <h3 class="footer__heading">Thông tin của chúng tôi</h3><i class="fas fa-chevron-down checkdl1"></i>
+                    </div>
+                    <ul class="footer__list collapse show" id="demo2">
+                        <li class="footer__item">
+                            @Html.ActionLink("Cơ sở 1: 140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP .CHM", "https://www.google.com/maps/place/Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+C%C3%B4ng+nghi%E1%BB%87p+Th%E1%BB%B1c+ph%E1%BA%A9m+TP.HCM/@10.8069256,106.6266457,17z/data=!3m1!4b1!4m5!3m4!1s0x31752be27d8b4f4d:0x92dcba2950430867!8m2!3d10.8069203!4d106.6288344", null, htmlAttributes: new { @class = "footer__item--link" })
+                        </li>
+                        <li class="footer__item">
+                            <a href="" class="footer__item--link">Cơ sở 2: 86 Đinh Bộ Lĩnh, P10, Quận Bình Thanh, TP.HCM</a>
+                            @Html.ActionLink("Cơ sở 2: 86 Đinh Bộ Lĩnh, P10, Quận Bình Thanh, TP.HCM", "https://www.google.com/maps/place/Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+C%C3%B4ng+nghi%E1%BB%87p+Th%E1%BB%B1c+ph%E1%BA%A9m+TP.HCM/@10.8069256,106.6266457,17z/data=!3m1!4b1!4m5!3m4!1s0x31752be27d8b4f4d:0x92dcba2950430867!8m2!3d10.8069203!4d106.6288344", null, htmlAttributes: new { @class = "footer__item--link" })
+                        </li>
+                        <li class="footer__item">
+                            <a href="" class="footer__item--link">Lĩnh vực kinh doanh</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div style="display: flex;justify-content:space-between;cursor: pointer;margin-bottom: 8px;"
+                         data-toggle="collapse" data-target="#demo1">
+                        <h3 class="footer__heading">Chính sách</h3><i class="fas fa-chevron-down checkdl1"></i>
+                    </div>
+                    <ul class="footer__list collapse show" id="demo1">
+                        <li class="footer__item">
+                            <a href="" class="footer__item--link">Chính sách bảo hành</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="" class="footer__item--link">Chính sách đổi trả</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="" class="footer__item--link">Chính sách thanh toán</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="" class="footer__item--link">Chính sách giao nhận hàng</a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="" class="footer__item--link">Chính sách bảo mật</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                    <div style="display: flex;justify-content:space-between;cursor: pointer;margin-bottom: 8px;"
+                         data-toggle="collapse" data-target="#demo">
+                        <h3 class="footer__heading">Hỗ trợ chung</h3><i class="fas fa-chevron-down checkdl1"></i>
+                    </div>
+                    <ul class="footer__list collapse show" id="demo">
+                        <li class="footer__item">
+                            @Html.ActionLink("Trang chủ", "Index", new { controller = "Home" }, htmlAttributes: new { @class = "footer__item--link" })
+                        <li class="footer__item">
+                                @Html.ActionLink("Giới thiệu", "Index", new { controller = "About" }, htmlAttributes: new { @class = "footer__item--link" })
+                        </li>
+                        <li class="footer__item">
+                                @Html.ActionLink("Sản phẩm", "Index", new { controller = "Product" }, htmlAttributes: new { @class = "footer__item--link" })
+                        </li>
+                        <li class="footer__item">
+                                @Html.ActionLink("Tin tức", "Index", new { controller = "Home" }, htmlAttributes: new { @class = "footer__item--link" })
+                        </li>
+                        <li class="footer__item">
+                                @Html.ActionLink("Liên hệ", "Index", new { controller = "Connect" }, htmlAttributes: new { @class = "footer__item--link" })
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - WebBanHang - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+        <div class="footer__bottom">
+            <p class="footer__text">© Bản quyền thuộc về P&T Shop</p>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <div id="go-to-top">
+        <a class="btn-gototop"><i class="fas fa-arrow-up"></i></a>
+    </div>
+
+    <script src="~/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    @RenderSection("script", required: false);
 </body>
 </html>

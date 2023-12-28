@@ -1,0 +1,67 @@
+﻿@model Product
+<link rel="stylesheet" href="~/css/productdetail.css">
+<a hidden id="productType-@Model.ProductId">@Model.ProductType.Name</a>
+<div class="col-lg-3 col-md-6 col-sm-12">
+    <a class="product__new-item product__new-Model" href="Customer/Products/Detail/@Model.ProductId" id="product-@Model.ProductId">
+        <div class="card" style="max-width:100%;min-height:98%;max-height:98%">
+            <div>
+                <img class="card-img-top" src="~/image/product/@Model.ImgeMain" alt="@Model.ProductId" id="img-@Model.ProductId">
+                <form action="" class="hover-icon hidden-sm hidden-xs">
+                    <input type="hidden">
+                    <a href="~/pay.html" class="btn-add-to-cart" title="Mua ngay">
+                        <i class="fas fa-cart-plus"></i>
+                    </a>
+                    <a data-toggle="modal" data-target="#myModal" class="quickview" title="Xem nhanh" id="QuickViewProduct" onclick="modal(`@Model.ProductId`,`@Model.ProductType.Name`,@Model.Price,@Model.Promotion)">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </form>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title custom__name-product" id="name-@Model.ProductId">
+                    @Model.Name
+                </h5>
+                <div class="product__price">
+                    @{
+                        if (Model.Promotion > 0)
+                        {
+                            double GiaMoi = (double)(Model.Price * (1 - Model.Promotion * 0.01));
+                            <p class="card-text price-color product__price-old">@string.Format("{0:0,0 đ}", @Model.Price)</p>
+                            <p class="card-text price-color product__price-new">@string.Format("{0:0,0 đ}", GiaMoi)</p>
+                        }
+                        else
+                        {
+                            <p class="card-text price-color product__price-new">@string.Format("{0:0,0 đ}", @Model.Price)</p>
+                        }
+                    }
+                </div>
+                <div class="home-product-item__action">
+                    <span class="home-product-item__like home-product-item__like--liked">
+                        <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                        <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+                    </span>
+                    <div class="home-product-item__rating">
+                        @{
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (i < Model.Evaluate)//Nhỏ hơn sao đánh giá
+                                {
+                                    <i class="home-product-item__star--gold fas fa-star"></i>
+                                    continue;
+                                }
+                                <i class="fas fa-star"></i>
+                            }
+                        }
+                    </div>
+                    <span class="home-product-item__sold">@Model.TotalSold đã bán</span>
+                </div>
+                @if (@Model.Promotion > 0)
+                {
+                    <div class="sale-off">
+                        <span class="sale-off-percent">@Model.Promotion%</span>
+                        <span class="sale-off-label">GIẢM</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </a>
+</div>

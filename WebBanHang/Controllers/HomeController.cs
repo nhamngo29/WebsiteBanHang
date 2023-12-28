@@ -1,21 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using WebBanHang.DataAcess.Repository;
+using WebBanHang.DataAcess.Repository.IRepository;
 using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUnitOfWork _IUnitOfWork;
+        public HomeController(IUnitOfWork IUnitOfWork)
         {
-            _logger = logger;
+            _IUnitOfWork = IUnitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var a= _IUnitOfWork.Product.GetAll(includeProperties: "ProductType");
+            return View(a);
         }
 
         public IActionResult Privacy()
