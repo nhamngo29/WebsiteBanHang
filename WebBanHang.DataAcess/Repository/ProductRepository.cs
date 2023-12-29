@@ -22,5 +22,9 @@ namespace WebBanHang.DataAcess.Repository
         {
             _db.products.Update(product);
         }
+        public int GetCountProductByIDProductType(int type)
+        {
+            return _db.products.Where(t=>t.ProductTypeID == type).Count();
+        }
     }
 }

@@ -52,9 +52,10 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="product__filter-trademark">
+                    @await Component.InvokeAsync("ProductTypeComponent");
+                    @* <div class="product__filter-trademark">
                         <h4 class="product__filter-heading">
-                            Thương hiệu <i class="fi-rs-minus" id="minus-2"></i> <i class="fi-rs-plus hidden" id="plus-2"></i>
+                            Loại <i class="fi-rs-minus" id="minus-2"></i> <i class="fi-rs-plus hidden" id="plus-2"></i>
                         </h4>
                         <ul id="thuonghieu" class="product__filter-ckeckbox">
                             <li class="product__filter-item">
@@ -64,7 +65,7 @@
                                 </label>
                             </li>
                         </ul>
-                    </div>
+                    </div> *@
                     <div class="product__filter-size">
                         <h4 class="product__filter-heading">
                             Size <i class="fi-rs-minus" onclick="khonghienthidanhsach(3,`size`)"

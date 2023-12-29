@@ -13,6 +13,7 @@ namespace WebBanHang.DataAcess.Repository.IRepository
         IImagesRepository Images { get; }
         ICateogryRepository Cateogry { get; }
         IBrandRepository Brand { get; }
+        IProductTypeRepository ProductType { get; }
         void Save();
     }
 }

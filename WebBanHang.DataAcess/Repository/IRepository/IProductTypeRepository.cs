@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +7,8 @@ using WebBanHang.Models;
 
 namespace WebBanHang.DataAcess.Repository.IRepository
 {
-    public interface IProductRepository:IRepository<Product>
+    public interface IProductTypeRepository : IRepository<ProductType>
     {
-        void Update(Product product);
-        int GetCountProductByIDProductType(int type);
+        void Update(ProductType product);
     }
 }

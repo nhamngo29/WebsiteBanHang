@@ -1,0 +1,21 @@
+﻿@model IEnumerable<WebBanHang.Models.ViewModel.ProductTypeComponentViewModel>
+<div class="product__filter-trademark">
+    <h4 class="product__filter-heading">
+        Loại <i class="fi-rs-minus" id="minus-2"></i> <i class="fi-rs-plus hidden" id="plus-2"></i>
+    </h4>
+
+    <ul id="thuonghieu" class="product__filter-ckeckbox">
+        @foreach (var item in Model)
+        {
+            <li class="product__filter-item justify-content-between d-flex">
+
+                <label class="form-check-label" for="th1">
+                    <input type="checkbox" class="form-check-input checkthuonghieu checkthuonghieu" id="th1" name="option2"
+                           value="something"><span>@item.Name</span>
+                </label>
+                <span>@item.Count</span>
+            </li>
+        }
+    </ul>
+
+</div>

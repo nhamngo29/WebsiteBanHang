@@ -19,6 +19,7 @@ namespace WebBanHang.DataAcess.Repository
         public IImagesRepository Images { get; private set; }
         public IBrandRepository Brand { get; private set; }
         public ICateogryRepository Cateogry { get; private set; }
+        public IProductTypeRepository ProductType { get; private set; }
 
         private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
@@ -40,6 +41,7 @@ namespace WebBanHang.DataAcess.Repository
             User = new UserRepository(_userManager, _roleManager, _db, _configuration, _signInManager, _Mapper);
             Brand = new BrandRepository(_db);
             Cateogry=new CategoryRepository(_db);
+            ProductType = new ProductTypeRepository(_db);
         }
 
         public void Save()
