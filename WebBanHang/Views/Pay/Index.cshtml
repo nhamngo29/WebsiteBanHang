@@ -1,4 +1,58 @@
-﻿<link rel="stylesheet" href="~/css/pay.css">
+﻿@model IEnumerable<Product>
+<link rel="stylesheet" href="~/css/pay.css">
+<link rel="stylesheet" href="~/css/base.css">
+<link rel="stylesheet" href="~/css/reponsive1.css">
+<!-- link icon -->
+<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+<link rel='stylesheet'
+      href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<style>
+    form.example input[type=text] {
+        padding: 10px;
+        font-size: 17px;
+        border: 1px solid grey;
+        float: left;
+        width: 80%;
+        background: #f1f1f1;
+    }
+
+    form.example button {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        background: #2196F3;
+        color: white;
+        font-size: 17px;
+        border: 1px solid grey;
+        border-left: none;
+        cursor: pointer;
+    }
+
+    form.example button:hover {
+        background: #0b7dda;
+    }
+
+    form.example::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Mobile & tablet  */
+    @@media (max-width: 1023px) {
+        .summary {
+            display: block;
+        }
+    }
+
+    /* tablet */
+    @@media (min-width: 740px) and (max-width: 1023px) {}
+
+    /* mobile */
+    @@media (max-width: 739px) {}
+</style>
 <div class="content">
     <div class="wrap">
         <div class="container">
@@ -76,7 +130,7 @@
                                     @if (User.Identity.IsAuthenticated)
                                     {
                                         <div class="main-customer-info-img">
-                                            <img src="./assets/img/product/noavatar.png" alt="" width="60px"
+                                            <img src="~/image/product/noavatar.png" alt="" width="60px"
                                                  height="60px">
                                         </div>
                                         <div class="main-customer-info-logged">
@@ -118,16 +172,6 @@
                                             <input id="diachi" type="text" class="form-control">
                                             <span class="form-message"></span>
                                         </div>
-                                        <div class="fieldset-address form-group">
-                                            <div class="container mt-5">
-                                                <select class="selectpicker" multiple aria-label="Default select example" data-live-search="true">
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                    <option value="4">Four</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                     }
                                 </div>
                             </div>
@@ -150,30 +194,21 @@
                                 <h2>Thông tin đơn hàng</h2>
                             </div>
                             <div class="sliderbar-content">
-                                <div class="row row-sliderbar">
-                                    <div class="col-4">
-                                        <img src="~/image/product/stansmith.jpg" alt="" width="80%">
-                                        <span class="notice">3</span>
+                                @foreach (var item in Model)
+                                {
+                                    <div class="row row-sliderbar">
+                                        <div class="col-4">
+                                            <img src="~/image/product/@item.ImgeMain" alt="" width="80%">
+                                            <span class="notice">3</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <h5>@item.Name</h5>
+                                        </div>
+                                        <div class="col-2">
+                                            <span>@item.Price ₫</span>
+                                        </div>
                                     </div>
-                                    <div class="col-6">
-                                        <h5>ÁO THỦ MÔN ĐTVN 2021 GRAND SPORT - 038-322 - VÀNG CAM</h5>
-                                    </div>
-                                    <div class="col-2">
-                                        <span>625,000₫</span>
-                                    </div>
-                                </div>
-                                <div class="row row-sliderbar">
-                                    <div class="col-4">
-                                        <img src="~/image/product/stansmith.jpg" alt="" width="80%">
-                                        <span class="notice">3</span>
-                                    </div>
-                                    <div class="col-6">
-                                        <h5>ÁO THỦ MÔN ĐTVN 2021 GRAND SPORT - 038-322 - VÀNG CAM</h5>
-                                    </div>
-                                    <div class="col-2">
-                                        <span>625,000₫</span>
-                                    </div>
-                                </div>
+                                }
                             </div>
                             <div class="slider-footer">
                                 <div class="subtotal">

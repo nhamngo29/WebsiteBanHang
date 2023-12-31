@@ -1,23 +1,4 @@
-﻿let items = document.querySelectorAll('.carousel .carousel-item')
-items.forEach((el) => {
-    const minPerSlide = 4
-    let next = el.nextElementSibling
-    for (var i = 1; i < minPerSlide; i++) {
-        if (!next) {
-            // wrap carousel by using first child
-            next = items[0]
-        }
-        let cloneChild = next.cloneNode(true)
-        el.appendChild(cloneChild.children[0])
-        next = next.nextElementSibling
-    }
-})
-//$(document).ready(function () {
-//    $(".big-img").imagezoomsl({
-//        zoomrange: [3, 3]
-//    });
-//});
-function fadeInModal() {
+﻿function fadeInModal() {
     $('.alert').fadeIn();
     $('.overlay1').fadeIn();
 }
@@ -42,8 +23,9 @@ $(document).ready(function () {
             success: function (rs) {
                 if (rs.Success) {
                     $('.header__second__cart--notice').html(rs.count);
-                    $('.alert__body-amount').html("Số Lượng: "+quantity);
                     $('.alert__body-name').html(rs.name);
+                    $('.alert__body-price').html(rs.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }););
+                    $('.alert__body-img').attr('src', '/Image/product/' + rs.image);
                     $('.alert').fadeIn();
                     $('.overlay1').fadeIn();
                 }
@@ -59,10 +41,13 @@ $(document).ready(function () {
             data: { id: id },
             success: function (rs) {
                 if (rs.Success) {
-                    
-                    $('#trow-'+ id).remove();
+
+                    $('#trow-' + id).remove();
                 }
             }
         });
     });
 });
+function closeAlert() {
+    document.getElementById("alert-cart").style.display = "none";
+}

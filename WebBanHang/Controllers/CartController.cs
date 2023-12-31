@@ -17,11 +17,11 @@ namespace WebBanHang.Controllers
             return View(Cart);
         }
         const string CART_KEY = "MYCART";
-        public List<CartItem> Cart=>HttpContext.Session.Get<List<CartItem>>(CART_KEY)??new List<CartItem>();
+        public List<CartItem> Cart => HttpContext.Session.Get<List<CartItem>>(CART_KEY) ?? new List<CartItem>();
         [HttpPost]
         public IActionResult AddToCart(string ID, int Quantity = 1)
         {
-            var code = new { Success = false, msg = "", code = -1, count = 0 };
+            var code = new { Success = false, msg = "", code = -1, count = 0, name="",image="" ,price=0.1};
             try
             {
                 var gioHang = Cart;
@@ -49,13 +49,13 @@ namespace WebBanHang.Controllers
                     item.Quantity += Quantity;
                 }
                 HttpContext.Session.Set(CART_KEY, gioHang);
-                
-                code = new { Success = true, msg = "Them san pham vao gio hang thanh cong", code = 1, count = Cart.Sum(t=>t.Quantity)};
+
+                code = new { Success = true, msg = "Them san pham vao gio hang thanh cong", code = 1, count = Cart.Sum(t => t.Quantity), name = item.Name, image = item.Image, price=item.Price};
                 return Json(code);
             }
             catch (Exception)
             {
-                code = new { Success = false, msg = "Them san pham vao gio hang khong thanh cong", code = 1, count = Quantity };
+                code = new { Success = false, msg = "Them san pham vao gio hang khong thanh cong", code = 1, count = Quantity ,name="", image = "", price=0.0 };
                 return Json(code);
                 throw;
             }

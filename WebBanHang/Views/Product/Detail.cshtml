@@ -226,7 +226,6 @@
         <img src="~/Image/product/@Model.ImgeMain" alt="" class="alert__body-img">
         <div>
             <h5 class="alert__body-name"></h5>
-
             <span class="alert__body-amount">Số lượng: 1</span>
             <h6 class="alert__body-price">@string.Format("{0:0,0 đ}", Model.Price)</h6>
         </div>
@@ -240,5 +239,14 @@
 @section script
 {
     <script src="~/js/Cart.js"></script>
+    <script src="~/js/zoomsl.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".big-img").imagezoomsl({
+                zoomrange: [3, 3]
+
+            });
+        });
+    </script>
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
