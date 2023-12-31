@@ -31,16 +31,14 @@ function fadeout() {
 }
 setInterval(fadeOutModal, 7000);
 $(document).ready(function () {
-    ShowCount();
     $('body').on('click', '.ajax-add-to-cart', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
         var quantity = parseInt($('#text_so_luong-2').val());
-        var price = parseFloat($('#price-pr').html());
         $.ajax({
-            url: '/Account/AddToCart',
+            url: '/Cart/AddToCart',
             type: 'POST',
-            data: { id: id, Quantity: quantity, price:price },
+            data: { ID: id, Quantity: quantity },
             success: function (rs) {
                 if (rs.Success) {
                     $('.header__second__cart--notice').html(rs.count);
@@ -66,13 +64,3 @@ $(document).ready(function () {
         });
     });
 });
-
-function ShowCount() {
-    $.ajax({
-        url: '/Account/ShowCount',
-        type: 'GET',
-        success: function (rs) {
-            $('.header__second__cart--notice').html(rs.Count);
-        }
-    });
-}

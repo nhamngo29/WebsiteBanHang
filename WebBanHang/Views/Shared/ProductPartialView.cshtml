@@ -8,7 +8,7 @@
                 <img class="card-img-top" src="~/image/product/@Model.ImgeMain" alt="@Model.ProductId" id="img-@Model.ProductId">
                 <form action="" class="hover-icon hidden-sm hidden-xs">
                     <input type="hidden">
-                    <a href="~/pay.html" class="btn-add-to-cart" title="Mua ngay">
+                    <a asp-action="index" asp-controller="Pay" asp-route-id="@Model.ProductId" class="btn-add-to-cart" title="Mua ngay">
                         <i class="fas fa-cart-plus"></i>
                     </a>
                     <a data-toggle="modal" data-target="#myModal" class="quickview" title="Xem nhanh" id="QuickViewProduct" onclick="modal(`@Model.ProductId`,`@Model.ProductType.Name`,@Model.Price,@Model.Promotion)">

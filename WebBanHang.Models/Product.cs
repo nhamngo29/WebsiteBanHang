@@ -45,7 +45,7 @@ namespace WebBanHang.Models
         public bool IsHot { get; set; }
         [DefaultValue(true)]
         public bool IsActive { get; set; }
-        public string Detail { get; set; }
+        public string? Detail { get; set; }
         public string? Description { get; set; }
     }
 }

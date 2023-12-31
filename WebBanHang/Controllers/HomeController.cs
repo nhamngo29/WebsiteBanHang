@@ -16,8 +16,12 @@ namespace WebBanHang.Controllers
 
         public IActionResult Index()
         {
-            var a= _IUnitOfWork.Product.GetAll(includeProperties: "ProductType");
-            return View(a);
+            List<Slide> Slides = _IUnitOfWork.Slide.GetFilter(t=>t.Active).ToList();
+            ViewBag.Slides = Slides;
+            ViewBag.Cout = Slides.Count();
+            List<Product> Products = _IUnitOfWork.Product.GetAll(includeProperties: "ProductType").ToList();
+
+            return View(Products);
         }
 
         public IActionResult Privacy()

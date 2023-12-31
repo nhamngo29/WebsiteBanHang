@@ -34,6 +34,9 @@
     }
 </style>
 <link rel="stylesheet" href="~/css/productdetail.css">
+
+<link rel="stylesheet" href="~/css/product.css">
+
 <div class="container">
     <div class="product__detail">
         <div class="row product__detail-row">
@@ -49,11 +52,11 @@
 
                     </ul>
                 </div>
-                <div id="main-img" style="cursor: pointer;">
-                    <img src="~/image/product/@Model.ImgeMain" class="big-img" alt="ảnh chính" id="img-main" xoriginal="~/image/product/@Model.ImgeMain">
+                <div id="main-img" style="cursor: pointer; position: relative;">
+                    <img src="~/image/product/@Model.ImgeMain" class="big-img" alt="ảnh chính" id="img-main" xoriginal="~/Image/product/@Model.ImgeMain">
                     @if (Model.Promotion > 0)
                     {
-                        <div class="sale-off sale-off-2">
+                        <div class="sale-off sale-off-2" style="position: absolute; top: 0; right: 0;">
                             <span class="sale-off-percent">@Model.Promotion%</span>
                             <span class="sale-off-label">GIẢM</span>
                         </div>
@@ -75,12 +78,11 @@
                     }
                 </div>
                 <div class="infor-oder">
-                    Loại sản phẩm: <b>@Model.ProductType.Name</b>
+                    Loại sản phẩm: <b>@Model.Brand.Name</b>
                 </div>
-
                 <div class="product__price">
                     <h2>@string.Format("{0:0,0 đ}", (Model.Price - (Model.Price * (Model.Promotion / 100))))</h2>
-                    <a id="price-pr" hidden>@ViewBag.Price</a>
+
                 </div>
 
                 @if (Model.Promotion > 0)
@@ -132,6 +134,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="product__wrap">
                     <div class="product__amount">
                         <label for="">Số lượng: </label>
@@ -185,22 +188,18 @@
                         if (n == 0)
                         {
                             <div class="carousel-item active">
-                                <div class="col-md-3">
-                                    @{
-                                       //Html.RenderAction("DisPlaySingleProduct", "Products", new { p = item });
-                                    }
-                                </div>
+
+                                @await Html.PartialAsync("ProductPartialView", (Product)item)
+
                             </div>
                             n++;
                         }
                         else
                         {
                             <div class="carousel-item">
-                                <div class="col-md-3">
-                                    @{
-                                        //Html.RenderAction("DisPlaySingleProduct", "Products", new { p = item });
-                                    }
-                                </div>
+
+                                @await Html.PartialAsync("ProductPartialView", (Product)item)
+
                             </div>
                         }
                     }
@@ -216,7 +215,7 @@
         </div>
     </div>
     <div class="seemore">
-        @Html.ActionLink("Xem thêm", "Index", new { ProType = Model.ProductType.Id, controller = "products" });
+        @Html.ActionLink("Xem thêm", "Index", new { ProType = Model.ProductTypeID, controller = "products" });
     </div>
 </div>
 <div id="alert-cart" class="alert" style="display:none">
@@ -224,23 +223,22 @@
         <h4>Thêm vào giỏ hàng</h4>
     </div>
     <div class="alert__body">
-        <img src="~/image/product/@Model.ImgeMain" alt="" class="alert__body-img">
+        <img src="~/Image/product/@Model.ImgeMain" alt="" class="alert__body-img">
         <div>
             <h5 class="alert__body-name"></h5>
 
             <span class="alert__body-amount">Số lượng: 1</span>
-            <h6 class="alert__body-price">@string.Format("{0:0,0 đ}", ViewBag.Price)</h6>
+            <h6 class="alert__body-price">@string.Format("{0:0,0 đ}", Model.Price)</h6>
         </div>
     </div>
     <div class="alert__footer">
-        @Html.ActionLink("Xem giỏ hàng", "Index", new { controller = "Products" }, htmlAttributes: new { @class = "click__cart", style = "border-radius: 4px" })
+        @Html.ActionLink("Xem giỏ hàng", "Index", new { controller = "Cart" }, htmlAttributes: new { @class = "click__cart", style = "border-radius: 4px" })
     </div>
 </div>
 <div class="overlay1" style="display: none" onclick="fadeout()">
-
 </div>
 @section script
 {
-    <script src="~/assets/js/main.js"></script>
-    <script src="~/assets/js/Cart.js"></script>
+    <script src="~/js/Cart.js"></script>
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

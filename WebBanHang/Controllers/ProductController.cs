@@ -13,8 +13,8 @@ namespace WebBanHang.Controllers
         }
         public IActionResult Index()
         {
-
-            return View();
+            var a = _IUnitOfWork.Product.GetAll(includeProperties: "ProductType");
+            return View(a);
         }
         public ActionResult Detail(string id)
         {
