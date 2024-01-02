@@ -4,13 +4,9 @@ using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
 {
-    public class PayController : Controller
+    public class PayController(IUnitOfWork _IUnitOfWork) : Controller
     {
-        private readonly IUnitOfWork _IUnitOfWork;
-        public PayController(IUnitOfWork IUnitOfWork)
-        {
-            _IUnitOfWork = IUnitOfWork;
-        }
+      
         public IActionResult Index(string ID,int Quantity)
         {
             List<Product> a=new List<Product>();

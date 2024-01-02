@@ -5,13 +5,8 @@ using WebBanHang.Models.ViewModel;
 
 namespace WebBanHang.Controllers
 {
-    public class CartController : Controller
+    public class CartController(IUnitOfWork _IUnitOfWork) : Controller
     {
-        private readonly IUnitOfWork _IUnitOfWork;
-        public CartController(IUnitOfWork IUnitOfWork)
-        {
-            _IUnitOfWork = IUnitOfWork;
-        }
         public IActionResult Index()
         {
             return View(Cart);

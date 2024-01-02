@@ -4,13 +4,8 @@ using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController(IUnitOfWork _IUnitOfWork) : Controller
     {
-        private readonly IUnitOfWork _IUnitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
-        {
-            _IUnitOfWork = unitOfWork;
-        }
         public IActionResult Index()
         {
             var a = _IUnitOfWork.Product.GetAll(includeProperties: "ProductType");

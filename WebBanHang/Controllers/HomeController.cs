@@ -6,14 +6,8 @@ using WebBanHang.Models;
 
 namespace WebBanHang.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(IUnitOfWork _IUnitOfWork) : Controller
     {
-        private readonly IUnitOfWork _IUnitOfWork;
-        public HomeController(IUnitOfWork IUnitOfWork)
-        {
-            _IUnitOfWork = IUnitOfWork;
-        }
-
         public IActionResult Index()
         {
             List<Slide> Slides = _IUnitOfWork.Slide.GetFilter(t=>t.Active).ToList();
