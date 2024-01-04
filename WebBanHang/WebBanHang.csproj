@@ -25,4 +25,9 @@
     <ProjectReference Include="..\WebBanHang.DataAcess\WebBanHang.DataAcess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Administrator\" />
+    <Folder Include="Areas\System\" />
+  </ItemGroup>
+
 </Project>
