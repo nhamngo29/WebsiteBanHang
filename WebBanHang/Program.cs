@@ -60,6 +60,7 @@ builder.Services.AddAuthentication(option =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
     };
 });
+builder.Services.AddSingleton(x => new PaypalClient(configuration["PaypalOptions:AppID"], configuration["PaypalOptions:AppSecret"], configuration["PaypalOptions:Mode"]));
 builder.Services.AddMemoryCache();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -69,6 +70,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 // Configure CORS policy
 app.UseCors(options =>
 {

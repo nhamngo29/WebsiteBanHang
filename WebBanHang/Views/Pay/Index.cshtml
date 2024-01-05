@@ -104,17 +104,17 @@
                                     <div class="subtotal">
                                         <div class="row row-sliderbar-footer">
                                             <div class="col-6"><span>Tạm tính:</span></div>
-                                            <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}",@totalPriceOrder)</span></div>
+                                            <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}", @totalPriceOrder)</span></div>
                                         </div>
                                         <div class="row row-sliderbar-footer">
                                             <div class="col-6"><span>Phí vận chuyển</span></div>
-                                            <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}",@priceShip)</span></div>
+                                            <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}", @priceShip)</span></div>
                                         </div>
                                     </div>
                                     <div class="total">
                                         <div class="row row-sliderbar-footer">
                                             <div class="col-6"><span>Tổng cộng:</span></div>
-                                            <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}",@totalPrice)</span></div>
+                                            <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}", @totalPrice)</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -190,6 +190,7 @@
                                 </div>
                                 <div class="pay">
                                     <button class="btn-pay form-submit">Thanh toán</button>
+                                    <div id="paypal-button-container" style="max-width:1000px;"></div>
                                 </div>
                             </div>
                         </div>
@@ -246,7 +247,41 @@
 </div>
 <script src="~/js/validator.js"></script>
 <script src="~/js/main.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.PaypalClientdId"></script>
 <script>
+    paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color: 'silver',
+            tagline: 'false'
+        },
+        createOrder: (data, actions) => {
+            return fetch("/Pay/create-paypal-order", {
+                method: "post",
+            }).then((response) => {
+                if (!response.ok) {
+                    return response.json().then(error => { throw error; });
+                }
+
+                return response.json();
+            }).then((order) => order.id)
+                .catch(error => alert(error.message));
+        },
+        onApprove: (data, actions) => {
+            return fetch(`/Pay/capture-paypal-order?orderId=${data.orderID}`, {
+                method: "post",
+            }).then((response) => {
+                if (!response.ok) {
+                    return response.json().then(error => { throw error; });
+                }
+
+                //Đổi địa chỉ tới action thông báo thành công
+                window.location.href = "/Pay/PaymentSuccess";
+            }).catch(error => alert(error.message));
+        }
+    }).render('#paypal-button-container');
+
+
     Validator({
         form: '#form-2',
         formGroupSelector: '.form-group',
