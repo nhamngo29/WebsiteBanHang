@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebBanHang.Models;
+using WebBanHang.Models.ViewModel;
 
 namespace WebBanHang.DataAcess.Helpers
 {
@@ -14,6 +15,7 @@ namespace WebBanHang.DataAcess.Helpers
         public AloperMapper()
         {
             CreateMap<User, UserViewModel>().ReverseMap();
+            CreateMap<Product,CartItem>().ReverseMap();
         }
     }
 }

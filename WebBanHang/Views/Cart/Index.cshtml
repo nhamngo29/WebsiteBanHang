@@ -29,33 +29,33 @@
                             <div class="cart-body">
                                 @foreach (var item in Model)
                                 {
-                                    <div class="row cart-body-row cart-body-row-1" id="trow-@item.IDProduct" style="align-items: center;">
+                                    <div class="row cart-body-row cart-body-row-1" id="trow-@item.ProductId" style="align-items: center;">
                                         <div class="col-md-11 col-10" style="text-align: center;">
                                             <div class="row card-info" style="align-items: center;">
                                                 <div class="col-md-2 col-12 card-info-img">
-                                                    <a href=""><img class="cart-img" src="~/image/product/@item.Image" alt=""></a>
+                                                    <a href=""><img class="cart-img" src="~/image/product/@item.ImgeMain" alt=""></a>
                                                 </div>
                                                 <div class="col-md-3 col-12">
-                                                    <a href="/products/detail/@item.IDProduct" class="cart-name"><h5>@item.Name</h5></a>
+                                                    <a href="/products/detail/@item.ProductId" class="cart-name"><h5>@item.Name</h5></a>
                                                 </div>
                                                 <div class="col-md-2 col-12" style="font-size: 16px;">
                                                     <input type="text" name="DonGia" id="" value="@string.Format("{0:0,0 đ}",item.Price)" style="border:none;">
-                                                    <input type="text" id="price-@item.IDProduct" value="@item.Price" style="border:none;" hidden>
+                                                    <input type="text" id="price-@item.ProductId" value="@item.Price" style="border:none;" hidden>
                                                 </div>
                                                 <div class="col-md-3 col-12">
                                                     <div class="cart-quantity">
-                                                        <input type="button" value="-" class="control" onclick="tru('@item.IDProduct')">
-                                                        <input type="text" value="@item.Quantity" class="text-input" id="text_so_luong-@item.IDProduct" onkeypress='validate(event)'>
-                                                        <input type="button" value="+" class="control" onclick="cong('@item.IDProduct')">
+                                                        <input type="button" value="-" class="control" onclick="tru('@item.ProductId')">
+                                                        <input type="text" value="@item.Quantity" class="text-input" id="text_so_luong-@item.ProductId" onkeypress='validate(event)'>
+                                                        <input type="button" value="+" class="control" onclick="cong('@item.ProductId')">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 col-12 hidden-xs" style="font-size: 16px;">
-                                                    <input type="text" name="Gia" id="total-@item.IDProduct" value="@string.Format("{0:0,0 VND}", item.TotalPrice)" style="border:none;">
+                                                    <input type="text" name="Gia" id="total-@item.ProductId" value="@string.Format("{0:0,0 VND}", item.TotalPrice)" style="border:none;">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-1 col-2 text-right">
-                                            <a href="#" data-id="@item.IDProduct" class="btnDelete"><i class="fas fa-trash"></i></a>
+                                            <a href="#" data-id="@item.ProductId" class="btnDelete"><i class="fas fa-trash"></i></a>
                                         </div>
                                     </div>
                                 }
@@ -80,7 +80,7 @@
                                 <input type="hidden" id="total-price" value="@Model.Sum(t=>t.TotalPrice)" />
                             </div>
                             <div class="cart-buttons">
-                                <a style="display: block; text-align: center;" class="chekout Ajax-pay">THANH TOÁN</a>
+                                <a asp-action="PayInSecction" asp-controller="Pay" style="display: block; text-align: center;" class="chekout Ajax-pay">THANH TOÁN</a>
                             </div>
                         </div>
                     </form>
@@ -101,23 +101,4 @@ else
 @section script {
     <script src="~/js/main.js"></script>
     <script src="~/js/Cart.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('body').on('click', '.Ajax-pay', function (e) {
-                e.preventDefault();
-                var price = parseFloat(document.getElementById('total-price').value);
-
-                $.ajax({
-                    url: '/Orders/Order',
-                    type: 'POST',
-                    data: { price: price },
-                    success: function (sr) {
-                        if (sr.Success) {
-                            location.assign("/Orders/OrderSucces");
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 }

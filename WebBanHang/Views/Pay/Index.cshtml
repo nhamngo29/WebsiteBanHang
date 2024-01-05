@@ -1,9 +1,10 @@
-﻿@model IEnumerable<Product>
+﻿@using WebBanHang.Models.ViewModel
+@model IEnumerable<CartItem>
 <link rel="stylesheet" href="~/css/pay.css">
 <link rel="stylesheet" href="~/css/base.css">
 <link rel="stylesheet" href="~/css/main.css">
 <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="~/css/reponsive1.css">
 <!-- link icon -->
 <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
@@ -33,9 +34,9 @@
         cursor: pointer;
     }
 
-    form.example button:hover {
-        background: #0b7dda;
-    }
+        form.example button:hover {
+            background: #0b7dda;
+        }
 
     form.example::after {
         content: "";
@@ -51,11 +52,18 @@
     }
 
     /* tablet */
-    @@media (min-width: 740px) and (max-width: 1023px) {}
+    @@media (min-width: 740px) and (max-width: 1023px) {
+    }
 
     /* mobile */
-    @@media (max-width: 739px) {}
+    @@media (max-width: 739px) {
+    }
 </style>
+@{
+    double totalPriceOrder = Model.Sum(t => t.TotalPrice);
+    double priceShip = (Model.Sum(t => t.TotalPrice) > 500000 ? 0 : 25000);
+    double totalPrice = totalPriceOrder + priceShip;
+}
 <div class="content">
     <div class="wrap">
         <div class="container">
@@ -68,50 +76,45 @@
                             </div>
                             <div class="summary-heading-price">
                                 <h4>
-                                    3.000.000 <i class="fas fa-chevron-down"
-                                                 style="margin-left: 20px;margin-right: 5px;"></i>
+                                    @string.Format("{0:0,0 đ}", totalPrice) <i class="fas fa-chevron-down"
+                                                                               style="margin-left: 20px;margin-right: 5px;"></i>
                                 </h4>
                             </div>
                         </div>
                         <div class="summary-content hidden">
                             <div class="sliderbar">
                                 <div class="sliderbar-content">
-                                    <div class="row row-sliderbar">
-                                        <div class="col-6">
-                                            <img src="./assets/img/product/stansmith.jpg" alt="" width="80%">
-                                            <span class="notice">3</span>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="row row-sliderbar">
+                                            <div class="col-6">
+                                                <img src="~/image/product/@item.ImgeMain" alt="" width="80%">
+                                                <span class="notice">@item.Quantity</span>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5><a href="/Product/Detail/@item.ProductId">@item.Name</a></h5>
+                                                <span>@string.Format("{0:0,0 đ}", item.Price)</span>
+                                            </div>
+
                                         </div>
-                                        <div class="col-6">
-                                            <h5>ÁO THỦ MÔN ĐTVN 2021 GRAND SPORT - 038-322 - VÀNG CAM</h5>
-                                            <span>625,000₫</span>
-                                        </div>
-                                    </div>
-                                    <div class="row row-sliderbar">
-                                        <div class="col-6">
-                                            <img src="./assets/img/product/stansmith.jpg" alt="" width="80%">
-                                            <span class="notice">3</span>
-                                        </div>
-                                        <div class="col-6">
-                                            <h5>ÁO THỦ MÔN ĐTVN 2021 GRAND SPORT - 038-322 - VÀNG CAM</h5>
-                                            <span>625,000₫</span>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                                 <div class="slider-footer">
                                     <div class="subtotal">
                                         <div class="row row-sliderbar-footer">
                                             <div class="col-6"><span>Tạm tính:</span></div>
-                                            <div class="col-6 text-right"><span>625,000₫</span></div>
+                                            <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}",@totalPriceOrder)</span></div>
                                         </div>
                                         <div class="row row-sliderbar-footer">
                                             <div class="col-6"><span>Phí vận chuyển</span></div>
-                                            <div class="col-6 text-right"><span>625,000₫</span></div>
+                                            <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}",@priceShip)</span></div>
                                         </div>
                                     </div>
                                     <div class="total">
                                         <div class="row row-sliderbar-footer">
                                             <div class="col-6"><span>Tổng cộng:</span></div>
-                                            <div class="col-6 text-right"><span>625,000₫</span></div>
+                                            <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}",@totalPrice)</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -202,13 +205,14 @@
                                     <div class="row row-sliderbar">
                                         <div class="col-4">
                                             <img src="~/image/product/@item.ImgeMain" alt="" width="80%">
-                                            <span class="notice">3</span>
+                                            <span class="notice">@item.Quantity</span>
                                         </div>
                                         <div class="col-6">
-                                            <h5>@item.Name</h5>
+                                            <h5><a href="/Product/Detail/@item.ProductId">@item.Name</a></h5>
+                                            <h5>@string.Format("{0:0,0 đ}", item.Price)</h5>
                                         </div>
                                         <div class="col-2">
-                                            <span>@item.Price ₫</span>
+                                            <span>@string.Format("{0:0,0 đ}", item.TotalPrice)</span>
                                         </div>
                                     </div>
                                 }
@@ -217,17 +221,19 @@
                                 <div class="subtotal">
                                     <div class="row row-sliderbar-footer">
                                         <div class="col-6"><span>Tạm tính:</span></div>
-                                        <div class="col-6 text-right"><span>625,000₫</span></div>
+                                        <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}", totalPriceOrder)</span></div>
                                     </div>
                                     <div class="row row-sliderbar-footer">
                                         <div class="col-6"><span>Phí vận chuyển</span></div>
-                                        <div class="col-6 text-right"><span>625,000₫</span></div>
+                                        <div class="col-6 text-right">
+                                            <span>@string.Format("{0:0,0 đ}", priceShip)</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="total">
                                     <div class="row row-sliderbar-footer">
                                         <div class="col-6"><span>Tổng cộng:</span></div>
-                                        <div class="col-6 text-right"><span>625,000₫</span></div>
+                                        <div class="col-6 text-right"><span>@string.Format("{0:0,0 đ}", totalPrice)</span></div>
                                     </div>
                                 </div>
                             </div>

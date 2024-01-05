@@ -341,7 +341,7 @@ namespace WebBanHang.DataAcess.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("ImgeMain")
                         .IsRequired()
                         .HasColumnType("nvarchar");
 

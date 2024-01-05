@@ -211,126 +211,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="product__wrap">
-                                <div class="product__amount">
-                                    <label for="">Số lượng: </label>
-                                    <input type="button" value="-" class="control" onclick="tru(1)">
-                                    <input type="text" value="1" class="text-input" id="text_so_luong-1" onkeypress='validate(event)'>
-                                    <input type="button" value="+" class="control" onclick="cong(1)">
-                                </div>
-                            </div>
-                            <div class="product__shopnow">
-                                <button class="shopnow2">Mua ngay</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="btn-default btn-close" data-dismiss="modal">
-                <i class="fas fa-times-circle"></i>
-            </button>
-        </div>
-    </div>
-</div>
-<div class="modal" id="myModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content ">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="mb-2 main-img-2">
-                            <img src="~/image/product/ALID0007-01-01.png" alt="" class="img-main" xoriginal="=~/image/product/ALID0007-01-01.png" id="modal-img-detail-product">
-                        </div>
-                        <ul class="all-img-2" id="imageList">
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <div class="info-product">
-                            <h3 class="product-name" id="modal-name-detail-product">
-                                123
-                            </h3>
-                            <div class="status-product">
-                                Trạng thái: <b>Còn hàng</b>
-                            </div>
-                            <div class="status-product">
-                            </div>
-                            <div class="infor-oder">
-                                Loại sản phẩm: <b id="modal-productype-detail-product"></b>
-                            </div>
-                            <div class="price-product">
-                                <div class="special-price">
-                                    <div class="special-price">
-                                        <p class="card-text price-color product__price-new" id="modal-price-new-detail-product"></p>
-                                    </div>
-                                    <div class="price-old">
-                                        Giá gốc:
-                                        <del id="modal-price-old-detail-product">650.000đ</del>
-                                        <span class="discount" id="modal-price-discount-detail-product">(-20%)</span>
+                            <form asp-action="Index" asp-controller="Pay">
+                                <input name="ID" type="text" value="1" class="text-input" id="idInputModel" hidden>
+                                <div class="product__wrap">
+                                    <div class="product__amount">
+                                        <label for="">Số lượng: </label>
+                                        <input type="button" value="-" class="control" onclick="tru(1)">
+                                        <input name="Quantity" type="text" value="1" class="text-input" id="text_so_luong-1" onkeypress='validate(event)'>
+                                        <input type="button" value="+" class="control" onclick="cong(1)">
                                     </div>
                                 </div>
-                                <div class="product-description">
-                                    Đầu tháng /2021, Nike chính thức trình
-                                    làng thế hệ tiếp theo của dòng giày đá bóng huyền thoại
-                                    thuộc nhà Swoosh là Tiempo Legend 9. Được mệnh danh là
-                                    thế hệ nhẹ nhất từ trước đến nay của dòng giày đá bóng Tiempo,
-                                    Legend 9 đã có những thay đổi đáng kể
-                                    về mặt thiết kế lẫn công nghệ nhằm giúp người chơi có thể tự
-                                    tin và phát huy tối đa khả năng khi chơi bóng.
+                                <div class="product__shopnow">
+                                    <button class="shopnow2">Mua ngay</button>
                                 </div>
-                            </div>
-                            <div class="product__color d-flex" style="align-items: center;">
-                                <div class="title" style="font-size: 16px; margin-right: 10px;">
-                                    Màu:
-                                </div>
-                                <div class="select-swap d-flex">
-
-                                    <div class="circlecheck">
-                                        <input type="radio" id="f-option" class="circle-1" name="selector" checked>
-                                        <label for="f-option"></label>
-                                        <div class="outer-circle"></div>
-                                    </div>
-                                    <div class="circlecheck">
-                                        <input type="radio" id="g-option" class="circle-2" name="selector">
-                                        <label for="g-option"></label>
-                                        <div class="outer-circle"></div>
-                                    </div>
-                                    <div class="circlecheck">
-                                        <input type="radio" id="h-option" class="circle-3" name="selector">
-                                        <label for="h-option"></label>
-                                        <div class="outer-circle"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product__size d-flex" style="align-items: center;">
-                                <div class="title" style="font-size: 16px; margin-right: 10px;">
-                                    Kích thước:
-                                </div>
-                                <div class="select-swap">
-                                    <div class="swatch-element" data-value="38">
-                                        <input type="radio" class="variant-1" id="swatch-1-38" name="mau" value="trung" onclick="check()">
-                                        <label for="swatch-1-38" class="sd"><span>38</span></label>
-                                    </div>
-                                    <div class="swatch-element" data-value="39">
-                                        <input type="radio" class="variant-1" id="swatch-1-39" name="mau" value="thanh" onclick="check()">
-                                        <label for="swatch-1-39" class="sd"><span>39</span></label>
-                                    </div>
-                                    <div class="swatch-element" data-value="40">
-                                        <input type="radio" class="variant-1" id="swatch-1-40" name="mau" value="hieu" onclick="check()">
-                                        <label for="swatch-1-40" class="sd"><span>40</span></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product__wrap">
-                                <div class="product__amount">
-                                    <label for="">Số lượng: </label>
-                                    <input type="button" value="-" class="control" onclick="tru(1)">
-                                    <input type="text" value="1" class="text-input" id="text_so_luong-1" onkeypress='validate(event)'>
-                                    <input type="button" value="+" class="control" onclick="cong(1)">
-                                </div>
-                            </div>
-                            <div class="product__shopnow">
-                                <button class="shopnow2">Mua ngay</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -348,7 +242,8 @@
     <div class="alert__body">
         <img src="~/Image/product/AKID0045-01-01.png" alt="" class="alert__body-img">
         <div>
-            <h5 class="alert__body-name">123</h5>
+            <h5 class="alert__body-name"></h5>
+
             <span class="alert__body-amount">Số lượng: 1</span>
             <h6 class="alert__body-price">@string.Format("{0:0,0 đ}", 123)</h6>
         </div>
@@ -362,6 +257,7 @@
 </div>
 @section script {
     <script src="~/js/CartView.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
     <script src="~/js/modal.js"></script>
 }

@@ -20,7 +20,7 @@ namespace WebBanHang.Controllers
             try
             {
                 var gioHang = Cart;
-                var item = gioHang.SingleOrDefault(t => t.IDProduct == ID);
+                var item = gioHang.SingleOrDefault(t => t.ProductId == ID);
                 if (item == null)
                 {
                     var hangHoa = _IUnitOfWork.Product.GetFirstOrDefault(t => t.ProductId == ID);
@@ -31,10 +31,10 @@ namespace WebBanHang.Controllers
                     }
                     item = new CartItem
                     {
-                        IDProduct = hangHoa.ProductId,
+                        ProductId = hangHoa.ProductId,
                         Name = hangHoa.Name,
                         Price = hangHoa.Price ?? 0,
-                        Image = hangHoa.ImgeMain ?? string.Empty,
+                        ImgeMain = hangHoa.ImgeMain ?? string.Empty,
                         Quantity = Quantity,
                     };
                     gioHang.Add(item);
@@ -45,7 +45,7 @@ namespace WebBanHang.Controllers
                 }
                 HttpContext.Session.Set(CART_KEY, gioHang);
 
-                code = new { Success = true, msg = "Them san pham vao gio hang thanh cong", code = 1, count = Cart.Sum(t => t.Quantity), name = item.Name, image = item.Image, price=item.Price};
+                code = new { Success = true, msg = "Them san pham vao gio hang thanh cong", code = 1, count = Cart.Sum(t => t.Quantity), name = item.Name, image = item.ImgeMain, price=item.Price};
                 return Json(code);
             }
             catch (Exception)

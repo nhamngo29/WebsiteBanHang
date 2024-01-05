@@ -146,7 +146,10 @@
                     <button type="button" class="add-cart ajax-add-to-cart" id="model-show" data-id="@Model.ProductId">Thêm vào giỏ</button>
                 </div>
                 <div class="product__shopnow">
-                    <button class="shopnow">Mua ngay</button>
+                    <form asp-action="Index" asp-controller="Pay">
+                        <input name="ID" type="text" value="@Model.ProductId" class="text-input" id="idInputModel">
+                        <button class="shopnow">Mua ngay</button>
+                    </form>
                     <span class="home-product-item__like home-product-item__like--liked">
                         <i class="home-product-item__like-icon-empty far fa-heart" style="font-size: 24px;margin-top: 7px;"></i>
                         <i class="home-product-item__like-icon-fill fas fa-heart" style="font-size: 24px;margin-top: 7px;"></i>
