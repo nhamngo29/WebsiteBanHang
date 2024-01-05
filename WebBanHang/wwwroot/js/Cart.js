@@ -31,8 +31,10 @@ function fadeout() {
 }
 setInterval(fadeOutModal, 7000);
 $(document).ready(function () {
+    
     $('body').on('click', '.ajax-add-to-cart', function (e) {
         e.preventDefault();
+
         var id = $(this).data('id');
         var quantity = parseInt($('#text_so_luong-2').val());
         $.ajax({
