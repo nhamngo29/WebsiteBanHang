@@ -23,6 +23,10 @@ namespace WebBanHang.DataAcess.Repository
 
         public ISlideRepository Slide { get; private set; }
 
+        public IOrderDetailRepository OrderDetail { get; private set; }
+
+        public IOrderRepository Order { get; private set; }
+
         private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -45,6 +49,8 @@ namespace WebBanHang.DataAcess.Repository
             Cateogry=new CategoryRepository(_db);
             ProductType = new ProductTypeRepository(_db);
             Slide=new SlideRepository(_db);
+            Order=new OrderRepository(_db); 
+            OrderDetail=new OrderDetailRepository(_db); 
         }
 
         public void Save()

@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VnPayLibrary\VnPayLibrary.csproj" />
     <ProjectReference Include="..\WebBanHang.DataAcess\WebBanHang.DataAcess.csproj" />
   </ItemGroup>
 

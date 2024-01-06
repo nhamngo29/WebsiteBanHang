@@ -2,26 +2,27 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebBanHang.DataAcess.Helpers;
+using WebBanHang.DataAcess.Repository;
 using WebBanHang.DataAcess.Repository.IRepository;
 using WebBanHang.Models;
 using WebBanHang.Models.ViewModel;
 
 namespace WebBanHang.Controllers
 {
-    public class PayController(IUnitOfWork _IUnitOfWork,IMapper mapper,PaypalClient _paypalClient) : Controller
+    public class PayController(IUnitOfWork _IUnitOfWork, IMapper mapper, PaypalClient _paypalClient) : Controller
     {
         private readonly PaypalClient paypalClient = _paypalClient;
-        public IActionResult Index(string ID,int Quantity=0)
+        public IActionResult Index(string ID, int Quantity = 0)
         {
-            Product product=_IUnitOfWork.Product.GetFirstOrDefault(t=>t.ProductId== ID);
-            CartItem cart=mapper.Map<CartItem>(product);
-            cart.Quantity=Quantity;
-            List<CartItem> items=new List<CartItem>();
+            Product product = _IUnitOfWork.Product.GetFirstOrDefault(t => t.ProductId == ID);
+            CartItem cart = mapper.Map<CartItem>(product);
+            cart.Quantity = Quantity;
+            List<CartItem> items = new List<CartItem>();
             items.Add(cart);
-            if (product==null)
+            if (product == null)
             {
                 return Redirect("/404");
-            }    
+            }
             return View(items);
         }
         const string CART_KEY = "MYCART";
@@ -29,7 +30,7 @@ namespace WebBanHang.Controllers
         public IActionResult PayInSecction()
         {
             ViewBag.PaypalClientdId = paypalClient.ClientId;
-            if(Cart!=null||Cart.Count>0)
+            if (Cart != null || Cart.Count > 0)
                 return View("Index", Cart);
             return BadRequest();
         }
@@ -59,7 +60,7 @@ namespace WebBanHang.Controllers
             try
             {
                 var response = await _paypalClient.CaptureOrder(orderId);
-
+          
                 // Lưu database đơn hàng của mình
 
                 return Ok(response);
@@ -72,14 +73,40 @@ namespace WebBanHang.Controllers
         }
         public IActionResult PaymentSuccess()
         {
+            double totalPriceOrder = Cart.Sum(t => t.TotalPrice);
+            double priceShip = (Cart.Sum(t => t.TotalPrice) > 500000 ? 0 : 25000);
+            double totalPrice = totalPriceOrder + priceShip;
+            Order order = new Order();
+            order.Total = totalPriceOrder;
+            order.Id = Guid.NewGuid().ToString();
+            order.Ship = priceShip;
+            order.TotalPrice = totalPrice;
+            order.DateBooking = DateTime.Now;
+            order.IdUser = null;
+            order.Status = 1;
+            _IUnitOfWork.Order.Add(order);
+            foreach(var item in Cart)
+            {
+                OrderDetail a=new OrderDetail();
+                a.IdProductt = item.ProductId;
+                a.IdOrder = order.Id;
+                a.Count = item.Quantity;
+                a.Price = item.Price;
+                _IUnitOfWork.OrderDetail.Add(a);
+            }
+            _IUnitOfWork.Save();
             HttpContext.Session.Remove("MYCART");
             return View();
         }
         public IActionResult Test()
         {
-           
+
             return View();
         }
         #endregion
+        public IActionResult PaymentCallBack()
+        {
+            return View();
+        }    
     }
 }

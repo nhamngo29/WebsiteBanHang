@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebBanHang.DataAcess.Helpers;
+using VnPayLibrary.Servirces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +62,7 @@ builder.Services.AddAuthentication(option =>
     };
 });
 builder.Services.AddSingleton(x => new PaypalClient(configuration["PaypalOptions:AppID"], configuration["PaypalOptions:AppSecret"], configuration["PaypalOptions:Mode"]));
+builder.Services.AddSingleton<IVnPayServirces, VnPayServirces>();
 builder.Services.AddMemoryCache();
 var app = builder.Build();
 // Configure the HTTP request pipeline.

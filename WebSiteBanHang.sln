@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBanHang.Models", "WebBan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebBanHang.DataAcess", "WebBanHang.DataAcess\WebBanHang.DataAcess.csproj", "{95E2E2BD-012E-4467-AB0E-F355504FD1EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VnPayLibrary", "VnPayLibrary\VnPayLibrary.csproj", "{FC3E161F-A2F0-4C37-AFEF-26A297302F27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{95E2E2BD-012E-4467-AB0E-F355504FD1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95E2E2BD-012E-4467-AB0E-F355504FD1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95E2E2BD-012E-4467-AB0E-F355504FD1EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC3E161F-A2F0-4C37-AFEF-26A297302F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC3E161F-A2F0-4C37-AFEF-26A297302F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC3E161F-A2F0-4C37-AFEF-26A297302F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC3E161F-A2F0-4C37-AFEF-26A297302F27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,6 +15,8 @@ namespace WebBanHang.DataAcess.Repository.IRepository
         IBrandRepository Brand { get; }
         IProductTypeRepository ProductType { get; }
         ISlideRepository Slide { get; }
+        IOrderDetailRepository OrderDetail { get; }
+        IOrderRepository Order {  get; }
         void Save();
     }
 }

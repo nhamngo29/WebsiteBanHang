@@ -20,6 +20,8 @@ namespace WebBanHang.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<Slide> Slides { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails {  get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -27,6 +29,7 @@ namespace WebBanHang.Data
                   .HasKey(m => new { m.ProductId, m.Id });
             modelBuilder.Entity<IdentityRole>().Property(x => x.Id).HasMaxLength(50).IsRequired(true);
             modelBuilder.Entity<User>().Property(x=>x.Id).HasMaxLength(50).IsRequired(true);
+            modelBuilder.Entity<OrderDetail>().HasKey(m => new { m.IdOrder, m.IdProductt });
             SeedRoles(modelBuilder);
         }
         private static void SeedRoles(ModelBuilder builder)

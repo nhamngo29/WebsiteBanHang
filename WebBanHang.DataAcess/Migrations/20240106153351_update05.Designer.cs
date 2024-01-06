@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebBanHang.Data;
 
@@ -11,9 +12,11 @@ using WebBanHang.Data;
 namespace WebBanHang.DataAcess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240106153351_update05")]
+    partial class update05
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,28 +55,28 @@ namespace WebBanHang.DataAcess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0bbf2c2e-79a2-435a-ad1d-e8c384f1b607",
+                            Id = "5e1516de-21e0-4d83-b3c8-76c16a1e9d1a",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "fa93568d-3dcb-4e14-afa0-dfd88f36f9d7",
+                            Id = "d89bcecf-3f44-4caf-abc4-681b9b0b3105",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = "05119e7a-6b64-407a-94f9-f4f852ebcdd9",
+                            Id = "24295078-a3e2-49ea-8e04-eeccd7e0c7d2",
                             ConcurrencyStamp = "3",
                             Name = "HR",
                             NormalizedName = "HR"
                         },
                         new
                         {
-                            Id = "d8e7a241-dc7f-4694-a386-1a6f03a6fd6d",
+                            Id = "6bf33bbd-0b68-402e-b521-52982e7d7eee",
                             ConcurrencyStamp = "4",
                             Name = "Customer",
                             NormalizedName = "Customer"
@@ -245,8 +248,11 @@ namespace WebBanHang.DataAcess.Migrations
 
             modelBuilder.Entity("WebBanHang.Models.Order", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DateBooking")
                         .HasColumnType("datetime2");
@@ -275,8 +281,8 @@ namespace WebBanHang.DataAcess.Migrations
 
             modelBuilder.Entity("WebBanHang.Models.OrderDetail", b =>
                 {
-                    b.Property<string>("IdOrder")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("IdOrder")
+                        .HasColumnType("int")
                         .HasColumnOrder(0);
 
                     b.Property<string>("IdProductt")
