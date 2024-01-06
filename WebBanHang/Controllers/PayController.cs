@@ -41,7 +41,6 @@ namespace WebBanHang.Controllers
             var tongTien = Cart.Sum(p => p.TotalPrice).ToString();
             var donViTienTe = "USD";
             var maDonHangThamChieu = "DH" + DateTime.Now.Ticks.ToString();
-
             try
             {
                 var response = await _paypalClient.CreateOrder(tongTien, donViTienTe, maDonHangThamChieu);
@@ -54,14 +53,12 @@ namespace WebBanHang.Controllers
                 return BadRequest(error);
             }
         }
-
-        [Authorize]
         [HttpPost("/Pay/capture-paypal-order")]
-        public async Task<IActionResult> CapturePaypalOrder(string orderID, CancellationToken cancellationToken)
+        public async Task<IActionResult> CapturePaypalOrder(string orderId, CancellationToken cancellationToken)
         {
             try
             {
-                var response = await _paypalClient.CaptureOrder(orderID);
+                var response = await _paypalClient.CaptureOrder(orderId);
 
                 // Lưu database đơn hàng của mình
 
@@ -73,7 +70,11 @@ namespace WebBanHang.Controllers
                 return BadRequest(error);
             }
         }
-
+        public IActionResult PaymentSuccess()
+        {
+            HttpContext.Session.Remove("MYCART");
+            return View();
+        }    
         #endregion
     }
 }
