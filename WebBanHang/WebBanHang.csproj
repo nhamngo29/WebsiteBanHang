@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\ApiAdress.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\ApiAdress.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
@@ -28,6 +36,10 @@
   <ItemGroup>
     <Folder Include="Areas\Administrator\" />
     <Folder Include="Areas\System\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\ApiAdress.js" />
   </ItemGroup>
 
 </Project>

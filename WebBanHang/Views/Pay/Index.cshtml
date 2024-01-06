@@ -1,17 +1,26 @@
 ﻿@using WebBanHang.Models.ViewModel
 @model IEnumerable<CartItem>
-<link rel="stylesheet" href="~/css/pay.css">
-<link rel="stylesheet" href="~/css/base.css">
-<link rel="stylesheet" href="~/css/main.css">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="~/css/reponsive1.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- link font chữ -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;600;700&display=swap">
 <!-- link icon -->
 <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 <link rel='stylesheet'
       href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!-- link css -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<link rel="stylesheet" href="~/css/pay.css">
 <style>
     form.example input[type=text] {
         padding: 10px;
@@ -155,12 +164,9 @@
                                     }
 
                                 </div>
+
                                 <div class="fieldset">
-                                    <div class="fieldset-address form-group">
-                                        <label for="diachi" class="form-label" for="">Địa chỉ</label>
-                                        <input id="diachi" type="text" class="form-control">
-                                        <span class="form-message"></span>
-                                    </div>
+                                    
                                     <div class="fieldset-name form-group">
                                         <label for="hoten" class="form-label" for="">Họ tên</label>
                                         <input id="hoten" type="text" class="form-control">
@@ -179,6 +185,29 @@
                                             <span class="form-message"></span>
                                         </div>
                                     }
+                                    <div class="fieldset-address form-group">
+                                        <label for="Diachi.Tp" class="form-label">Tỉnh</label>
+                                        <select for="Diachi.Tp" class="form-control" id="province">
+                                        </select>
+                                        <span validation-for="Diachi.Tp" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="fieldset-address form-group">
+                                        <label for="Diachi.Quan" class="form-label">Quận</label>
+                                        <select for="Diachi.Quan" class="form-control" id="district"></select>
+                                        <span validation-for="Diachi.Quan" class="text-danger"></span>
+                                    </div>
+                                    <div class="fieldset-address form-group">
+                                        <label for="Diachi.Phuong" class="form-label">Phường</label>
+                                        <select for="Diachi.Phuong" class="form-control" id="ward">
+                                        </select>
+                                        <span validation-for="Diachi.Phuong" class="text-danger"></span>
+                                    </div>
+                                    <div class="fieldset-address form-group">
+                                        <label for="diachi" class="form-label" for="">Địa chỉ</label>
+                                        <input id="diachi" type="text" class="form-control">
+                                        <span class="form-message"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="main-footer">
@@ -245,9 +274,14 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.PaypalClientdId"></script>
 <script src="~/js/validator.js"></script>
 <script src="~/js/main.js"></script>
-<script src="https://www.paypal.com/sdk/js?client-id=@ViewBag.PaypalClientdId"></script>
+<script src="~/js/ApiAdress.js"></script>
+
 <script>
     paypal.Buttons({
         style: {

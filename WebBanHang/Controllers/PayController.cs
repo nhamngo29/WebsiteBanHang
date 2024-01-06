@@ -74,7 +74,12 @@ namespace WebBanHang.Controllers
         {
             HttpContext.Session.Remove("MYCART");
             return View();
-        }    
+        }
+        public IActionResult Test()
+        {
+           
+            return View();
+        }
         #endregion
     }
 }
