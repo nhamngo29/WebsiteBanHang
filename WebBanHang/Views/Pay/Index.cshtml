@@ -76,7 +76,6 @@
 <div class="content">
     <div class="wrap">
         <div class="container">
-            <form action="">
                 <div class="row">
                     <div class="summary col-lg-6 col-12 hidden">
                         <div class="summary-heading">
@@ -166,7 +165,7 @@
                                 </div>
 
                                 <div class="fieldset">
-                                    
+
                                     <div class="fieldset-name form-group">
                                         <label for="hoten" class="form-label" for="">Họ tên</label>
                                         <input id="hoten" type="text" class="form-control">
@@ -218,9 +217,11 @@
                                     </a>
                                 </div>
                                 <div class="pay">
-                                    <button class="btn-pay form-submit">Thanh toán (COD)</button>
-                                    <div id="paypal-button-container" style="max-width:1000px;"></div>
-                                    <button type="submit" name="paymentVnPay" class="btn-pay form-submit">Thanh toán VnPay</button>
+                                    <form asp-action="CheckOut" asp-controller="Pay">
+                                        <input name="MethodPayment" value="COD" type="submit" class="btn-pay form-submit" />
+                                        <div id="paypal-button-container" style="max-width:1000px;"></div>
+                                        <input name="MethodPayment" value="VnPay" type="submit" class="btn-pay form-submit" />
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -271,7 +272,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 </div>

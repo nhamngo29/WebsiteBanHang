@@ -98,15 +98,25 @@ namespace WebBanHang.Controllers
             HttpContext.Session.Remove("MYCART");
             return View();
         }
-        public IActionResult Test()
-        {
-
-            return View();
-        }
+        
         #endregion
         public IActionResult PaymentCallBack()
         {
             return View();
-        }    
+        }
+        [HttpPost]
+        public IActionResult CheckOut(string MethodPayment)
+        {
+            if (MethodPayment == "COD")
+            {
+                // Xử lý thanh toán COD
+            }
+            else if (MethodPayment == "VnPay")
+            {
+                // Xử lý thanh toán VnPay
+            }
+            return null;
+            // Rest of your code
+        }
     }
 }
