@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VnPayLibrary.Servirces;
 using WebBanHang.DataAcess.Helpers;
 using WebBanHang.DataAcess.Repository;
 using WebBanHang.DataAcess.Repository.IRepository;
@@ -12,6 +13,7 @@ namespace WebBanHang.Controllers
     public class PayController(IUnitOfWork _IUnitOfWork, IMapper mapper, PaypalClient _paypalClient) : Controller
     {
         private readonly PaypalClient paypalClient = _paypalClient;
+        private readonly IVnPayServirces _vnPayservice;
         public IActionResult Index(string ID, int Quantity = 0)
         {
             Product product = _IUnitOfWork.Product.GetFirstOrDefault(t => t.ProductId == ID);
@@ -114,6 +116,15 @@ namespace WebBanHang.Controllers
             else if (MethodPayment == "VnPay")
             {
                 // Xử lý thanh toán VnPay
+                var vnPayModel = new VnPayMentRequestModel
+                {
+                    Amount = Cart.Sum(p => p.TotalPrice),
+                    CreatedDate = DateTime.Now,
+                    Description = $"{"Nguyeenx Nham Ngo"} {"0779442612"}",
+                    FullName = "Nguyeenx Nham Ngo",
+                    OrderID = Guid.NewGuid().ToString()
+                };
+                return Redirect(_vnPayservice.CreatePaymentUrl(HttpContext, vnPayModel));
             }
             return null;
             // Rest of your code
