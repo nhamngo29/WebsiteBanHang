@@ -23,6 +23,6 @@ namespace WebBanHang.Models.ViewModel
         public string Description { get; set; }
         public double Amount { get; set; }
         public DateTime CreatedDate {  get; set; }
-        public string OrderID {  get; set; }
+        public int OrderId { get; set; }
     }
 }

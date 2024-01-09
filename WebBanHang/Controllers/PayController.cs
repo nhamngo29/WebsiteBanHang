@@ -10,10 +10,10 @@ using WebBanHang.Models.ViewModel;
 
 namespace WebBanHang.Controllers
 {
-    public class PayController(IUnitOfWork _IUnitOfWork, IMapper mapper, PaypalClient _paypalClient) : Controller
+    public class PayController(IUnitOfWork _IUnitOfWork, IMapper mapper, PaypalClient _paypalClient, IVnPayServirces vnPayServirces) : Controller
     {
         private readonly PaypalClient paypalClient = _paypalClient;
-        private readonly IVnPayServirces _vnPayservice;
+        private readonly IVnPayServirces _vnPayservice = vnPayServirces;
         public IActionResult Index(string ID, int Quantity = 0)
         {
             Product product = _IUnitOfWork.Product.GetFirstOrDefault(t => t.ProductId == ID);
@@ -62,7 +62,7 @@ namespace WebBanHang.Controllers
             try
             {
                 var response = await _paypalClient.CaptureOrder(orderId);
-          
+
                 // Lưu database đơn hàng của mình
 
                 return Ok(response);
@@ -87,9 +87,9 @@ namespace WebBanHang.Controllers
             order.IdUser = null;
             order.Status = 1;
             _IUnitOfWork.Order.Add(order);
-            foreach(var item in Cart)
+            foreach (var item in Cart)
             {
-                OrderDetail a=new OrderDetail();
+                OrderDetail a = new OrderDetail();
                 a.IdProductt = item.ProductId;
                 a.IdOrder = order.Id;
                 a.Count = item.Quantity;
@@ -100,11 +100,22 @@ namespace WebBanHang.Controllers
             HttpContext.Session.Remove("MYCART");
             return View();
         }
-        
+
         #endregion
-        public IActionResult PaymentCallBack()
+        #region VnPay
+        public IActionResult PaymentFail()
         {
             return View();
+        }
+        public IActionResult PaymentCallBack()
+        {
+            var response = _vnPayservice.PaymentExecute(Request.Query);
+            if (response == null || response.VnPayResponseCode != "00")
+            {
+                TempData["Message"] = $"Lỗi thanh toán VN Pay: {response.VnPayResponseCode}";
+                return RedirectToAction("PaymentFail");
+            }
+            return RedirectToAction("PaymentSuccess");
         }
         [HttpPost]
         public IActionResult CheckOut(string MethodPayment)
@@ -122,12 +133,13 @@ namespace WebBanHang.Controllers
                     CreatedDate = DateTime.Now,
                     Description = $"{"Nguyeenx Nham Ngo"} {"0779442612"}",
                     FullName = "Nguyeenx Nham Ngo",
-                    OrderID = Guid.NewGuid().ToString()
+                    OrderId = new Random().Next(1000, 100000)
                 };
                 return Redirect(_vnPayservice.CreatePaymentUrl(HttpContext, vnPayModel));
             }
             return null;
             // Rest of your code
         }
+        #endregion
     }
 }

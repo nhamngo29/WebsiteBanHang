@@ -25,6 +25,13 @@ namespace WebBanHang.Models
         public double TotalPrice { get; set; }
         [Column(TypeName = "nvarchar")]
         public string? IdUser { get; set; }
+        public string? FullNameRecipient {  get; set; }
+        public int? City {  get; set; }
+        public int? District { get; set; }
+        public int? Ward {  get; set; }
+        public int? PhoneNumber {  get; set; }
+        public string? Adress {  get; set; }
+        public string? Note {  get; set; }
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         [ForeignKey("IdUser")]
         public virtual User? AppUser { get; set; }
