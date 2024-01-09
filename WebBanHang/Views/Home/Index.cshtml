@@ -276,6 +276,8 @@
         var image = document.getElementById("modal-img-detail-product");
         var image_main = document.getElementById(`img-${id}`);
         $('#modal-name-detail-product').text($(`#name-${id}`).text());
+        $('#idInputModel').val(id);
+
         $('#modal-productype-detail-product').text(ProductTypeName);
         if (Promotion > 0) {
             $('#modal-price-old-detail-product').text(Price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }));

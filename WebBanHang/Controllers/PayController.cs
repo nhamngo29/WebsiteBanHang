@@ -14,17 +14,18 @@ namespace WebBanHang.Controllers
     {
         private readonly PaypalClient paypalClient = _paypalClient;
         private readonly IVnPayServirces _vnPayservice = vnPayServirces;
-        public IActionResult Index(string ID, int Quantity = 0)
+        public IActionResult Index(string ID, int Quantity = 1)
         {
+            ViewBag.PaypalClientdId = paypalClient.ClientId;
             Product product = _IUnitOfWork.Product.GetFirstOrDefault(t => t.ProductId == ID);
-            CartItem cart = mapper.Map<CartItem>(product);
-            cart.Quantity = Quantity;
-            List<CartItem> items = new List<CartItem>();
-            items.Add(cart);
             if (product == null)
             {
                 return Redirect("/404");
             }
+            CartItem cart = mapper.Map<CartItem>(product);
+            cart.Quantity = Quantity;
+            List<CartItem> items = new List<CartItem>();
+            items.Add(cart);
             return View(items);
         }
         const string CART_KEY = "MYCART";
