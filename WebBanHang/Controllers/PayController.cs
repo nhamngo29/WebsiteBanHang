@@ -128,10 +128,11 @@ namespace WebBanHang.Controllers
             else if (MethodPayment == "VnPay")
             {
                 // Xử lý thanh toán VnPay
+                TimeZoneInfo vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Ho_Chi_Minh");
                 var vnPayModel = new VnPayMentRequestModel
                 {
                     Amount = Cart.Sum(p => p.TotalPrice),
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone),
                     Description = $"{"Nguyeenx Nham Ngo"} {"0779442612"}",
                     FullName = "Nguyeenx Nham Ngo",
                     OrderId = new Random().Next(1000, 100000)
