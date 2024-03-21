@@ -1,4 +1,16 @@
-﻿@model IEnumerable<Product>
+﻿@using WebBanHang.DataAcess.Helpers
+@model IEnumerable<Product>
+@{
+    ViewBag.Title = "Sản phẩm";
+    Pager pager = new Pager();
+    int pageNo = 0;
+    int Sort = ViewBag.Sort;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
 <style>
 
     .pagination > li > a {
@@ -14,6 +26,7 @@
         }
 </style>
 <link rel="stylesheet" href="~/css/product.css">
+<link rel="stylesheet" href="~/css/pagination.css">
 <div class="product">
     <div class="container">
         <div class="row">
@@ -93,25 +106,34 @@
             <div class="col-lg-9 col-12">
                 <div class="sort-wrap row">
                     <div class="sort-left col-12 col-lg-6">
-                        <h1 class="coll-name">Tất cả sản phẩm</h1>
+                        <h1 class="coll-name" style="text-align:left">Tất cả sản phẩm</h1>
                     </div>
                     <div class="sort-right col-12 col-lg-6">
                         <div class="sortby">
                             <label for="">Sắp xếp theo:</label>
                             <div class="dropdown">
-                                <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
-                                    Sản phẩm nổi bật
-                                </button>
-                                <div class="dropdown-menu" style="width: 143px;">
-                                    @Html.ActionLink("Giá: Tăng dần", "Index", new { Sort = 1, controller = "Products" }, htmlAttributes: new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Giá: Giảm dần", "Index", new { Sort = 2, controller = "Products" }, htmlAttributes: new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Tên A-Z", "Index", new { Sort = 3, controller = "Products" }, htmlAttributes: new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Tên Z-A", "Index", new { Sort = 4, controller = "Products" }, htmlAttributes: new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Cũ nhất", "Index", new { Sort = 5, controller = "Products" }, htmlAttributes: new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Mới nhất", "Index", new { Sort = 6, controller = "Products" }, htmlAttributes: new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Bán chạy nhất", "Index", new { Sort = 7, controller = "Products" }, htmlAttributes: new { @class = "dropdown-item" })
-                                </div>
-                            </div>
+    <select class="form-control" id="sortDropdown" onchange="window.location.href=this.value;">
+        @{
+            var sortOptions = new[]
+            {
+                new { Sort = 1, Text = "Giá: Tăng dần" },
+                new { Sort = 2, Text = "Giá: Giảm dần" },
+                new { Sort = 3, Text = "Tên A-Z" },
+                new { Sort = 4, Text = "Tên Z-A" },
+                new { Sort = 5, Text = "Cũ nhất" },
+                new { Sort = 6, Text = "Mới nhất" },
+                new { Sort = 7, Text = "Bán chạy nhất" }
+            };
+        }
+        @foreach (var option in sortOptions)
+        {
+            var url = Url.Action("Index", new { Sort = option.Sort, controller = "Product", Page = pageNo });
+            <option value="@url" @(Sort == option.Sort ? "selected" : "")>@option.Text</option>
+        }
+    </select>
+</div>
+
+
                         </div>
                         <div class="sortby2 hidden" style="float: right;">
                             <div class="dropdown">
@@ -198,11 +220,27 @@
 
                     }*@
                 </div>
+                <nav class="pagination-container">
+                    <div class="pagination">
+                        <a class="pagination-newer" asp-controller="Product" asp-action="Index" asp-route-page="@(pager.CurrentPage-1)" asp-route-Sort="@Sort">PREV</a>
+                        <span class="pagination-inner">
+                            @if (pager.TottalPages > 0)
+                            {
+                                @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                                {
+                                    <a class="@(pge==pager.CurrentPage?"pagination-active":"")" asp-controller="Product" asp-action="Index" asp-route-page="@pge" asp-route-Sort="@Sort">@pge</a>
+                                }
+                            }
 
+                        </span>
+                        <a class="pagination-older" asp-controller="Product" asp-action="Index" asp-route-page="@(pager.CurrentPage+1)" asp-route-Sort="@Sort">NEXT</a>
+                    </div>
+                </nav>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
@@ -226,6 +264,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal" id="myModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content ">
@@ -366,7 +405,23 @@
 }
 <script>
 
-   
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy ra menu thả xuống
+        var dropdown = document.getElementById("sortDropdown");
+
+        // Kiểm tra xem đã có giá trị lưu trữ trong localStorage hay không
+        var selectedSort = localStorage.getItem("selectedSort");
+        if (selectedSort) {
+            // Thiết lập lại giá trị đã chọn từ localStorage
+            dropdown.value = selectedSort;
+        }
+
+        // Xử lý sự kiện khi người dùng thay đổi giá trị trong menu thả xuống
+        dropdown.addEventListener("change", function () {
+            // Lưu giá trị đã chọn vào localStorage
+            localStorage.setItem("selectedSort", dropdown.value);
+        });
+    });
     function modal(id, ProductTypeName, Price, Promotion) {
         const apiUrl = `/api/ImageProducts/GetByID/${id}`;
         fetchDataFromApi(apiUrl)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebBanHang.DataAcess.Helpers;
 using WebBanHang.DataAcess.Repository.IRepository;
 using WebBanHang.Models;
 
@@ -6,10 +7,48 @@ namespace WebBanHang.Controllers
 {
     public class ProductController(IUnitOfWork _IUnitOfWork) : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int page=1,int? sort=1)
         {
-            var a = _IUnitOfWork.Product.GetAll(includeProperties: "ProductType");
-            return View(a);
+            var Products = _IUnitOfWork.Product.GetAll(includeProperties: "ProductType").ToList();
+            const int pageSize = 12;
+            if (page < 1)
+                page = 1;
+            int resCount = Products.Count();
+            var pager = new Pager(resCount, page, pageSize);
+            if(pager.EndPage<page)
+                page=pager.EndPage;
+            int recSkip = (page - 1) * pageSize;
+            var data = Products.Skip(recSkip).Take(pager.PageSize).ToList();
+            switch (sort)
+            {
+                case 1:
+                    data=data.OrderBy(x => x.Price).ToList();
+                    break;
+                case 2:
+                    data = data.OrderByDescending(x => x.Price).ToList();
+                    break;
+                case 3:
+                    data = data.OrderBy(x => x.Name).ToList();
+                    break;
+                case 4:
+                    data = data.OrderByDescending(x => x.Name).ToList();
+                    break;
+                case 5:
+                    data = data.OrderByDescending(x => x.DateCreate).ToList();
+                    break;
+                case 6:
+                    data = data.OrderBy(x => x.DateCreate).ToList();
+                    break;
+                case 7:
+                    data = data.OrderByDescending(x => x.TotalSold).ToList();
+                    break;
+                default:
+                    data = data;
+                    break;
+            }
+            this.ViewBag.Pager = pager;
+            ViewBag.Sort=sort;  
+            return View(data);
         }
         public ActionResult Detail(string id)
         {
