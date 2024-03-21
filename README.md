@@ -12,5 +12,5 @@
   <li>Nguyễn Nhâm Ngọ (https://github.com/nhamngo29)</li>
 </ul>
 
-> **App có tích hợp 2 services VNBank, Paypal**
+> **App có tích hợp 2 services VnPay, Paypal**
 <div align="center">
