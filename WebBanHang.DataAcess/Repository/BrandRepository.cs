@@ -21,5 +21,6 @@ namespace WebBanHang.DataAcess.Repository
         {
             _db.Brands.Update(brand);
         }
+        
     }
 }

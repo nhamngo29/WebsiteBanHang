@@ -128,7 +128,7 @@
         @foreach (var option in sortOptions)
         {
             var url = Url.Action("Index", new { Sort = option.Sort, controller = "Product", Page = pageNo });
-            <option value="@url" @(Sort == option.Sort ? "selected" : "")>@option.Text</option>
+            //<option value="@url" @(Sort == option.Sort ? "selected" : "")>@option.Text</option>
         }
     </select>
 </div>

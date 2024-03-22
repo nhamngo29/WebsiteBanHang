@@ -8,8 +8,10 @@ namespace WebBanHang.Controllers
 {
     public class HomeController(IUnitOfWork _IUnitOfWork) : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            Category brand = new Category(1,"Hi");
+            List<Category> test =await _IUnitOfWork.Cateogry.GetA(brand);
             List<Slide> Slides = _IUnitOfWork.Slide.GetFilter(t=>t.Active).ToList();
             ViewBag.Slides = Slides;
             ViewBag.Cout = Slides.Count();

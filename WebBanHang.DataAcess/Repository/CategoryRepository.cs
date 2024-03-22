@@ -21,5 +21,9 @@ namespace WebBanHang.DataAcess.Repository
         {
             _db.Categories.Update(category);
         }
+        public async Task<List<Category>> GetA(Category b)
+        {
+            return await _db.GetDataFromStoredProcedure<Category>("test", b);
+        }
     }
 }

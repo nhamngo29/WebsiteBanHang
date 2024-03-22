@@ -10,5 +10,6 @@ namespace WebBanHang.DataAcess.Repository.IRepository
     public interface ICateogryRepository : IRepository<Category>
     {
         void Update(Category product);
+        public Task<List<Category>> GetA(Category b);
     }
 }

@@ -10,5 +10,11 @@ namespace WebBanHang.Models
         [Display(Name = "Tên thể loại")]
         [Required(ErrorMessage = "Tên danh mục chưa được nhập")]
         public string Name { get; set; }
+
+        public Category(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }
