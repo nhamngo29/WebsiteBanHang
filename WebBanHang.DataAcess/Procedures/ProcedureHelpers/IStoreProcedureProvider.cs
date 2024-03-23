@@ -12,8 +12,6 @@ namespace WebBanHang.DataAcess.Procedures.ProcedureHelpers
 {
     public interface IStoreProcedureProvider
     {
-        string ConnectionString { get; set; }
-        string ExternalConnectionString { get; set; }
         Task<List<TModel>> GetDataFromStoredProcedure<TModel>(string storedProcName, object parameters) where TModel : class;
         Task<IDictionary<string, object>> GetResultValueFromStore(string storedProcName, object parameters);
         Task<DataSet> GetMultiDataFromStoredProcedure(string storedProcName, List<ReportParameter> parameters);

@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 using WebBanHang.DataAcess.Asposes.ReportExporter;
 using WebBanHang.DataAcess.Models;
 using WebBanHang.DataAcess.Report.Dto;
-using WebBanHang.DataAcess.Storage;
-
 namespace WebBanHang.DataAcess.Asposes
 {
-    public class AsposeAppService
+    public class AsposeAppService:IAsposeAppService
     {
         private readonly IReportExporter _customReportFile;
-        private readonly ITempFileCacheManager _tempFileCacheManager;
+
+        public AsposeAppService(IReportExporter customReportFile)
+        {
+            _customReportFile = customReportFile;
+        }
+
         public async Task<FileDto> GetReport(ReportInfo info)
         {
             try
@@ -33,7 +36,7 @@ namespace WebBanHang.DataAcess.Asposes
                 {
                     fileName = info.FileName;
                 }
-                fileName = fileName.Substring(0, fileName.LastIndexOf(".")) + "-" + Guid.NewGuid().ToString();
+                fileName = "Test";
 
                 switch (info.TypeExport.ToLower())
                 {
@@ -47,8 +50,6 @@ namespace WebBanHang.DataAcess.Asposes
                         file = new FileDto(fileName + ".docx", MimeTypeNames.ApplicationVndOpenxmlformatsOfficedocumentWordprocessingmlDocument);
                         break;
                 }
-
-                _tempFileCacheManager.SetFile(file.FileToken, reportByteArray.ToArray());
                 return file;
             }
             catch (Exception e)

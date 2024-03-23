@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspose.PDF" Version="19.7.0" />
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
@@ -39,10 +40,21 @@
   <ItemGroup>
     <Folder Include="Areas\Administrator\" />
     <Folder Include="Areas\System\" />
+    <Folder Include="LicenseManager\" />
+    <Folder Include="wwwroot\Report\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\js\ApiAdress.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="aspose-lic\Aspose.lic">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="aspose-lic\Aspose.Total.lic">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

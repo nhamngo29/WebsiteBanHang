@@ -11,6 +11,9 @@ using System.Text;
 using WebBanHang.DataAcess.Helpers;
 using VnPayLibrary.Servirces;
 using WebBanHang.DataAcess.Procedures.ProcedureHelpers;
+using WebBanHang.DataAcess.Asposes.ReportExporter;
+using WebBanHang.DataAcess.Asposes;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +31,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+Aspose.Pdf.License license = new Aspose.Pdf.License();
+license.SetLicense("aspose-lic/Aspose.Total.lic");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -46,6 +51,8 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 builder.Services.AddAutoMapper(typeof(AloperMapper));
 builder.Services.AddScoped<IStoreProcedureProvider,StoreProcedureProvider>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IReportExporter, ReportExporter>();
+builder.Services.AddScoped<IAsposeAppService, AsposeAppService>();
 builder.Services.AddAuthentication(option =>
 {
     option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -97,3 +104,11 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "DownloadPdf",
+        pattern: "pdf/download/{fileToken}", // Định dạng URL bạn muốn sử dụng
+        defaults: new { controller = "Pdf", action = "DownloadPdf" }
+    );
+});

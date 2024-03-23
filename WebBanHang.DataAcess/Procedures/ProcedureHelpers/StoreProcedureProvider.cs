@@ -54,8 +54,8 @@ namespace WebBanHang.DataAcess.Procedures.ProcedureHelpers
         private readonly IConfiguration _configuration;
         private readonly int commandTimeout = 30;
 
-        public string ConnectionString { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ExternalConnectionString { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ConnectionString= "";
+        public string ExternalConnectionString = "";
 
         public StoreProcedureProvider(IConfiguration configuration)
         {
