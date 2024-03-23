@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebBanHang.DataAcess.Helpers;
 using VnPayLibrary.Servirces;
+using WebBanHang.DataAcess.Procedures.ProcedureHelpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     options.Password.RequiredLength = 6;
 }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddAutoMapper(typeof(AloperMapper));
+builder.Services.AddScoped<IStoreProcedureProvider,StoreProcedureProvider>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAuthentication(option =>
 {
