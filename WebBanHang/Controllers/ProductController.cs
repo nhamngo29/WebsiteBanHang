@@ -1,54 +1,62 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebBanHang.DataAcess.Helpers;
+using WebBanHang.DataAcess.Paramets;
 using WebBanHang.DataAcess.Repository.IRepository;
 using WebBanHang.Models;
+using WebBanHang.Models.ViewModel;
 
 namespace WebBanHang.Controllers
 {
     public class ProductController(IUnitOfWork _IUnitOfWork) : Controller
     {
-        public IActionResult Index(int page=1,int? sort=1)
+        private readonly int pageSize = 12;
+        public async Task<IActionResult> Index(int page=1,int? sort=1)
         {
-            var Products = _IUnitOfWork.Product.GetAll(includeProperties: "ProductType").ToList();
-            const int pageSize = 12;
+            Product_p a=new Product_p();
+            a.SoRecordMoiTrang = pageSize;
+            a.SoTrang = page;
+            int totalRecord = 0;
+            
+            List<ProductViewModel> Products;
+            (Products, totalRecord) = await _IUnitOfWork.Product.SearchProductAsync(a);
+
             if (page < 1)
                 page = 1;
-            int resCount = Products.Count();
+            int resCount = totalRecord;
             var pager = new Pager(resCount, page, pageSize);
             if(pager.EndPage<page)
                 page=pager.EndPage;
             int recSkip = (page - 1) * pageSize;
-            var data = Products.Skip(recSkip).Take(pager.PageSize).ToList();
             switch (sort)
             {
                 case 1:
-                    data=data.OrderBy(x => x.Price).ToList();
+                    Products = Products.OrderBy(x => x.Price).ToList();
                     break;
                 case 2:
-                    data = data.OrderByDescending(x => x.Price).ToList();
+                    Products = Products.OrderByDescending(x => x.Price).ToList();
                     break;
                 case 3:
-                    data = data.OrderBy(x => x.Name).ToList();
+                    Products = Products.OrderBy(x => x.Name).ToList();
                     break;
                 case 4:
-                    data = data.OrderByDescending(x => x.Name).ToList();
+                    Products = Products.OrderByDescending(x => x.Name).ToList();
                     break;
                 case 5:
-                    data = data.OrderByDescending(x => x.DateCreate).ToList();
+                    Products = Products.OrderByDescending(x => x.DateCreate).ToList();
                     break;
                 case 6:
-                    data = data.OrderBy(x => x.DateCreate).ToList();
+                    Products = Products.OrderBy(x => x.DateCreate).ToList();
                     break;
                 case 7:
-                    data = data.OrderByDescending(x => x.TotalSold).ToList();
+                    Products = Products.OrderByDescending(x => x.TotalSold).ToList();
                     break;
                 default:
-                    data = data;
+                    Products = Products;
                     break;
             }
             this.ViewBag.Pager = pager;
             ViewBag.Sort=sort;  
-            return View(data);
+            return View(Products);
         }
         public ActionResult Detail(string id)
         {

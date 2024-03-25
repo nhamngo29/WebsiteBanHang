@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebBanHang.DataAcess.Paramets;
 using WebBanHang.Models;
+using WebBanHang.Models.ViewModel;
 
 namespace WebBanHang.DataAcess.Repository.IRepository
 {
@@ -12,5 +14,6 @@ namespace WebBanHang.DataAcess.Repository.IRepository
     {
         void Update(Product product);
         int GetCountProductByIDProductType(int type);
+        public Task<(List<ProductViewModel>, int)> SearchProductAsync(Product_p a);
     }
 }

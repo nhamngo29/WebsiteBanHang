@@ -3,6 +3,7 @@ using System.Diagnostics;
 using WebBanHang.DataAcess.Repository;
 using WebBanHang.DataAcess.Repository.IRepository;
 using WebBanHang.Models;
+using WebBanHang.Models.ViewModel;
 
 namespace WebBanHang.Controllers
 {
@@ -11,7 +12,6 @@ namespace WebBanHang.Controllers
         public async Task<IActionResult> Index()
         {
             Category brand = new Category(1,"Hi");
-            List<Category> test =await _IUnitOfWork.Cateogry.GetA(brand);
             List<Slide> Slides = _IUnitOfWork.Slide.GetFilter(t=>t.Active).ToList();
             ViewBag.Slides = Slides;
             ViewBag.Cout = Slides.Count();

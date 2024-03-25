@@ -31,8 +31,10 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-Aspose.Pdf.License license = new Aspose.Pdf.License();
-license.SetLicense("aspose-lic/Aspose.Total.lic");
+//Aspose.Cells.License cellLicense = new Aspose.Cells.License();
+//cellLicense.SetLicense(Directory.GetCurrentDirectory() + "/aspose-lic/Aspose.lic");
+//Aspose.Words.License wordLicense = new Aspose.Words.License();
+//wordLicense.SetLicense(Directory.GetCurrentDirectory() + "/aspose-lic/Aspose.Total.lic");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
