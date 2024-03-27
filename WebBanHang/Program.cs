@@ -1,11 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using WebBanHang.Data;
-using WebBanHang.DataAcess.Repository.IRepository;
-using WebBanHang.DataAcess.Repository;
-using WebBanHang.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebBanHang.DataAcess.Helpers;
@@ -13,6 +6,7 @@ using VnPayLibrary.Servirces;
 using WebBanHang.DataAcess.Procedures.ProcedureHelpers;
 using WebBanHang.DataAcess.Asposes.ReportExporter;
 using WebBanHang.DataAcess.Asposes;
+using WebBanHang.Installers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,23 +30,10 @@ builder.Services.AddSession(options =>
 //Aspose.Words.License wordLicense = new Aspose.Words.License();
 //wordLicense.SetLicense(Directory.GetCurrentDirectory() + "/aspose-lic/Aspose.Total.lic");
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
-builder.Services.AddIdentity<User, IdentityRole>(options =>
-{
-    options.Password.RequireDigit = false;   // Không yêu cầu số
-    options.Password.RequireLowercase = false;   // Không yêu cầu chữ thường
-    options.Password.RequireUppercase = false;   // Không yêu cầu chữ hoa
-    options.Password.RequireNonAlphanumeric = false;   // Không yêu cầu ký tự đặc biệt
-    options.Password.RequiredLength = 6;
-}).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+builder.Services.InstallerServiceInAssembly(configuration);
 builder.Services.AddAutoMapper(typeof(AloperMapper));
 builder.Services.AddScoped<IStoreProcedureProvider,StoreProcedureProvider>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 builder.Services.AddScoped<IReportExporter, ReportExporter>();
 builder.Services.AddScoped<IAsposeAppService, AsposeAppService>();
 builder.Services.AddAuthentication(option =>

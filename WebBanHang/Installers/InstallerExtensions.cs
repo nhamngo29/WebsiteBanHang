@@ -1,0 +1,16 @@
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+
+namespace WebBanHang.Installers
+{
+    public static class InstallerExtensions
+    {
+        public static void InstallerServiceInAssembly(this IServiceCollection services, IConfiguration configuration)
+        {
+            var installer = typeof(IStartup).Assembly.ExportedTypes.Where(t => typeof(IInstaller).IsAssignableFrom(t) && !t.IsInterface
+            && !t.IsAbstract).Select(Activator.CreateInstance).Cast<IInstaller>().ToList();
+            installer.ForEach(installer => installer.InstrallServices(services, configuration));
+        }
+    }
+}
