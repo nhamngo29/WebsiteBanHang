@@ -7,6 +7,13 @@ using WebBanHang.DataAcess.Procedures.ProcedureHelpers;
 using WebBanHang.DataAcess.Asposes.ReportExporter;
 using WebBanHang.DataAcess.Asposes;
 using WebBanHang.Installers;
+using Aspose.Cells.Charts;
+using Microsoft.AspNetCore.Identity;
+using WebBanHang.Data;
+using WebBanHang.DataAcess.Repository;
+using WebBanHang.Models;
+using Microsoft.EntityFrameworkCore;
+using WebBanHang.DataAcess.Repository.IRepository;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,8 +41,6 @@ builder.Services.InstallerServiceInAssembly(configuration);
 builder.Services.AddAutoMapper(typeof(AloperMapper));
 builder.Services.AddScoped<IStoreProcedureProvider,StoreProcedureProvider>();
 
-builder.Services.AddScoped<IReportExporter, ReportExporter>();
-builder.Services.AddScoped<IAsposeAppService, AsposeAppService>();
 builder.Services.AddAuthentication(option =>
 {
     option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

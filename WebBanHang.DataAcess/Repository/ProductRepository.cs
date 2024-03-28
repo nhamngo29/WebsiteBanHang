@@ -32,12 +32,8 @@ namespace WebBanHang.DataAcess.Repository
         public async Task<(List<ProductViewModel>, int)> SearchProductAsync(Product_p a)
         {
             int @TotalRecord = 0;
-            var ddataa = await _db.GetDataFromStoredProcedure<ProductViewModel>("Search_Product", new
-            {
-                Search = a.Search,
-                SoTrang = a.SoTrang,
-                SoRecordMoiTrang = a.SoRecordMoiTrang
-            });
+            var ddataa = await _db.GetDataFromStoredProcedure<ProductViewModel>("Search_Product",
+            a);
             //var ddataa = await _db.GetDataFromStoredProcedure<ProductViewModel>("Search_Product", a);
             TotalRecord = a.TotalRecord;
             return (ddataa, TotalRecord);

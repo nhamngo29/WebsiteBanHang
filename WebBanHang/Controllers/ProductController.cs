@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebBanHang.Atributes;
 using WebBanHang.DataAcess.Helpers;
 using WebBanHang.DataAcess.Paramets;
 using WebBanHang.DataAcess.Repository.IRepository;
@@ -10,6 +11,7 @@ namespace WebBanHang.Controllers
     public class ProductController(IUnitOfWork _IUnitOfWork) : Controller
     {
         private readonly int pageSize = 12;
+        [Cache(100)]
         public async Task<IActionResult> Index(int page=1,int? sort=1)
         {
             Product_p a=new Product_p();
